@@ -46,9 +46,15 @@ def get_delirium_testing(value):
 nurse_data['del_positive'] = nurse_data.apply(lambda row: get_delirium_testing(row['nursingchartvalue']),axis=1)
 
 #%% Get patientstay ID list with onsets and labels. 
-del_onset = nurse_data[['patientunitstayid','nursingchartoffset']].groupby('patientunitstayid').min().reset_index()
+#Get only positive delirium scores. 
+del_onset = nurse_data[['patientunitstayid','nursingchartoffset','del_positive']]
+del_onset = del_onset[del_onset['del_positive']==1]
+#Find the earliest positive delirium score. 
+del_onset = del_onset[['patientunitstayid','nursingchartoffset']].groupby('patientunitstayid').min().reset_index()
+#Find all patients that had any positive delirium scoring. 
 labels = nurse_data[['patientunitstayid','del_positive']].groupby('patientunitstayid').max().reset_index()
-dataset = del_onset.merge(labels,on='patientunitstayid',how='inner')
+#Combine the info.
+dataset = del_onset.merge(labels,on='patientunitstayid',how='right')
 
 #27,250 pat stays
 #%% Further filtering.
@@ -59,8 +65,11 @@ dataset = dataset[dataset['unitdischargeoffset']>=1440]
 #21,339 pat stays
 
 #Remove those with delirium onset before 24 hours. 
-dataset = dataset[dataset['nursingchartoffset']<1440]
-#17,598 pat stays
+early_onset = nurse_data[nurse_data['nursingchartoffset']<1440]
+early_onset = early_onset[early_onset['del_positive']==1]
+early_onset = early_onset['patientunitstayid'].drop_duplicates()
+dataset = dataset[~dataset['patientunitstayid'].isin(early_onset)]
+#18,443 pat stays
 
 #%% Save off stuff. 
 dataset.rename(columns={'nursingchartoffset':'del_onset','unitdischargeoffset':'LOS'},inplace=True)
