@@ -82,3 +82,6 @@ def region_to_nums(region):
         return np.nan
     
 comp['region'] = comp['region'].apply(region_to_nums)
+
+#%% Save off results.
+comp.to_csv('static_features_first_24hrs.csv',index=False)
