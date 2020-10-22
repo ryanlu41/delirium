@@ -7,10 +7,10 @@ An age of >89 was converted to 90.
 Hospital traits were converted from categorical strings to categorical numbers. 
 
 For numbedscategory:
-- <100 : 1
+- less than 100 : 1
 - 100 - 249 : 2
 - 250 - 499 : 3
-- >= 500 : 4
+- greater than 500 : 4
 
 For teaching status:
 - t : 1
