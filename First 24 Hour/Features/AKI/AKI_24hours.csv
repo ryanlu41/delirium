@@ -19327,8 +19327,8 @@ patientunitstayid,24hr_AKI
 1675646,False
 1675680,False
 1675686,False
-1675724,False
-1675725,False
+1675724,True
+1675725,True
 1675731,False
 1675774,False
 1675821,False
@@ -20010,7 +20010,7 @@ patientunitstayid,24hr_AKI
 1693854,False
 1693876,False
 1693882,True
-1693972,False
+1693972,True
 1694000,False
 1694003,False
 1694005,False

@@ -30,7 +30,7 @@ diag = diag.applymap(lambda s:s.lower() if type(s) == str else s)
 #Only keep AKI related diagnoses
 # strings = diag[['diagnosisstring']]
 # strings.drop_duplicates(inplace=True)
-search_terms_list = ['acute renal failure','traumatic reanl injury'] #Tried aki, got nothing.
+search_terms_list = ['acute renal failure','traumatic renal injury'] #Tried aki, got nothing.
 diag = diag[diag['diagnosisstring'].str.contains('|'.join(search_terms_list),na=False)]
 
 #Just get the stay IDs
