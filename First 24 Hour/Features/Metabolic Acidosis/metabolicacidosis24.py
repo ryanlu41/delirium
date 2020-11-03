@@ -15,7 +15,7 @@ metacid24_diagnosis = metacid_diagnosis[metacid_diagnosis['diagnosisoffset'] <= 
 
 # Metabolic acidosis is bicarb < 24 and pH <7.35 within 12 hours of each other
 # Find bicarbonate from lab
-bicarb_lab = lab[lab['labname'].isin(['Total CO2', 'bicarbinate', 'HCO3'])]
+bicarb_lab = lab[lab['labname'].isin(['Total CO2', 'bicarbonate', 'HCO3'])]
 # First 24 hours
 bicarb24_lab = bicarb_lab[bicarb_lab['labresultoffset'] <= 1440]
 bicarb24_lab = bicarb24_lab[bicarb24_lab['labresultoffset'] >= 0]
