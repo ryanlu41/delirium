@@ -3,9 +3,9 @@ import numpy as np
 import pandas as pd
 
 # Load all tables
-diagnosis = pd.read_csv("./diagnosis.csv", usecols=['patientunitstayid', 'icd9code', 'diagnosisoffset'])
-lab = pd.read_csv("./lab.csv", usecols=['patientunitstayid', 'labresultoffset', 'labname', 'labresult'])
-delirium = pd.read_csv('complete_patientstayid_list.csv')
+diagnosis = pd.read_csv("../../eICU/diagnosis.csv", usecols=['patientunitstayid', 'icd9code', 'diagnosisoffset'])
+lab = pd.read_csv("../../eICU/lab.csv", usecols=['patientunitstayid', 'labresultoffset', 'labname', 'labresult'])
+delirium = pd.read_csv('../../Dataset/complete_patientstayid_list.csv')
 
 # Pull metabolic acidosis from diagnosis table
 # Pull corresponding metabolic acidosis icd9 codes
@@ -40,12 +40,11 @@ metacid24 = metacid24_diagnosis.join(metacid24_lab.set_index('patientunitstayid'
     .drop_duplicates('patientunitstayid')
 
 # Compare to list of delirium patients to add positive or negative metabolic acidosis diagnosis to relevant patients
-delirium_metacid = delirium.merge(metacid24, left_on='PatientStayID',
-                                  right_on='patientunitstayid', how='left', indicator=True)
-delirium_metacid['MetabolicAcidosis'] = np.where(delirium_metacid['_merge'] == 'both', 1, 0)
+delirium_metacid = delirium.merge(metacid24, on='patientunitstayid', how='left', indicator=True)
+delirium_metacid['metabolicacidosis'] = np.where(delirium_metacid['_merge'] == 'both', 1, 0)
 
 # Drop unnecessary columns
-delirium_ma = delirium_metacid[['PatientStayID', 'MetabolicAcidosis']]
+delirium_ma = delirium_metacid[['patientunitstayid', 'metabolicacidosis']]
 
 # Save
 delirium_ma.to_csv('first24hr_metabolicacidosis.csv', index=False)
