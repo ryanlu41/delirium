@@ -19,7 +19,7 @@ bicarb_lab = lab[lab['labname'].isin(['Total CO2', 'bicarbonate', 'HCO3'])]
 # First 24 hours
 bicarb24_lab = bicarb_lab[bicarb_lab['labresultoffset'] <= 1440]
 bicarb24_lab = bicarb24_lab[bicarb24_lab['labresultoffset'] >= 0]
-# Bicarbinate <24
+# Bicarbonate <24
 ma_bicarb24_lab = bicarb24_lab[bicarb24_lab['labresult'] < 24]
 
 # Find pH from lab
