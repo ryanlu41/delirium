@@ -10,6 +10,8 @@ Diagnoses were used to remove early-onset patients, but were not considered
 reliable enough time stamps to use for delirium onset time since it's just when 
 the delirium was entered. 
 
+Run time: 5 minutes
+
 @author: Kirby
 """
 
@@ -20,21 +22,28 @@ import os
 #import multiprocessing as mp
 import time
 
-pat = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\patient.csv", usecols=['patientunitstayid', 'unitdischargeoffset'])
+start = time.time()
+
+pat = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\patient.csv", 
+                  usecols=['patientunitstayid', 'unitdischargeoffset'])
 
 #%% Find all CAM-ICUs and delirium diagnoses, remove NaNs
 
 #Just get CAM-ICU/ICDSC data.
-nurse_data = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\nurseCharting.csv",nrows=0)
-for chunk in pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\nurseCharting.csv", chunksize=500000):
+nurse_data = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\nurseCharting_delirium.csv",
+                         nrows=0)
+for chunk in pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\nurseCharting_delirium.csv",
+                         chunksize=1000000):
     temp_rows = chunk[chunk['nursingchartcelltypevalname']=='Delirium Score']
     nurse_data = pd.concat([nurse_data,temp_rows])
     
-nurse_data = nurse_data[['patientunitstayid', 'nursingchartoffset','nursingchartvalue']].dropna()
+nurse_data = nurse_data[['patientunitstayid', 'nursingchartoffset',
+                         'nursingchartvalue']].dropna()
 
 #Get delirium diagnosis data.
 diagnosis_data = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\diagnosis.csv")
-diagnosis_data = diagnosis_data[diagnosis_data["diagnosisstring"]=='neurologic|altered mental status / pain|delirium']
+diagnosis_data = diagnosis_data[diagnosis_data[
+    "diagnosisstring"]=='neurologic|altered mental status / pain|delirium']
 
 #%% Convert the values to 1s or 0s (1 for positive for delirium, 0 for negative).
 def get_delirium_testing(value):
@@ -50,17 +59,21 @@ def get_delirium_testing(value):
         return 0
     
     
-nurse_data['del_positive'] = nurse_data.apply(lambda row: get_delirium_testing(row['nursingchartvalue']),axis=1)
+nurse_data['del_positive'] = nurse_data.apply(
+    lambda row: get_delirium_testing(row['nursingchartvalue']),axis=1)
 
 #%% Get patientstay ID list with onsets and labels. 
 
 #Get only positive delirium scores. 
-del_onset = nurse_data[['patientunitstayid','nursingchartoffset','del_positive']]
+del_onset = nurse_data[['patientunitstayid','nursingchartoffset',
+                        'del_positive']]
 del_onset = del_onset[del_onset['del_positive']==1]
 #Find the earliest positive delirium score. 
-del_onset = del_onset[['patientunitstayid','nursingchartoffset']].groupby('patientunitstayid').min().reset_index()
+del_onset = del_onset[['patientunitstayid','nursingchartoffset']].groupby(
+    'patientunitstayid').min().reset_index()
 #Find all patients that had any positive delirium scoring. 
-labels = nurse_data[['patientunitstayid','del_positive']].groupby('patientunitstayid').max().reset_index()
+labels = nurse_data[['patientunitstayid','del_positive']].groupby(
+    'patientunitstayid').max().reset_index()
 #Combine the info.
 dataset = del_onset.merge(labels,on='patientunitstayid',how='right')
 
@@ -79,13 +92,24 @@ early_onset = early_onset['patientunitstayid'].drop_duplicates()
 dataset = dataset[~dataset['patientunitstayid'].isin(early_onset)]
 #18,443 pat stays
 
-#Get early delirium diagnoses. 
+#Get early delirium diagnoses and exclude cases that had them. 
 early_diag = diagnosis_data[diagnosis_data['diagnosisoffset']<1440]
 early_diag = early_diag['patientunitstayid'].drop_duplicates()
 dataset = dataset[~dataset['patientunitstayid'].isin(early_diag)]
 #18,346 pat stays.
 
+#Remove cases that had delirium diagnoses but no positive CAM-ICU/ICDSC.
+diag = diagnosis_data[['patientunitstayid']].drop_duplicates()
+no_pos_test = dataset[dataset['del_positive']==0]
+no_pos_test = no_pos_test[['patientunitstayid']].drop_duplicates()
+diag_but_no_pos = diag.merge(no_pos_test,how='inner',on='patientunitstayid')
+dataset = dataset[~dataset['patientunitstayid'].isin(
+    diag_but_no_pos['patientunitstayid'])]
+#Should end with 18,305
+
+
 #%% Save off stuff. 
 dataset.rename(columns={'nursingchartoffset':'del_onset','unitdischargeoffset':'LOS'},inplace=True)
 dataset.to_csv('first_24hr_prediction_dataset.csv',index=False)
 
+calc_time = time.time() - start
