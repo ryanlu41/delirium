@@ -124,42 +124,42 @@ def SOFA_score(row):
     sofa_liver = 0
     if (not np.isnan(row['bilirubin'])):
         if (row['bilirubin'] >= 12):
-            sofa_nervous = 4
+            sofa_liver = 4
         elif (row['bilirubin'] >= 6 and row['bilirubin'] < 12):
-            sofa_nervous = 3
+            sofa_liver = 3
         elif (row['bilirubin'] >= 2 and row['bilirubin'] < 6):
-            sofa_nervous = 2
+            sofa_liver = 2
         elif (row['bilirubin'] >= 1.2 and row['bilirubin'] < 2):
-            sofa_nervous = 1
+            sofa_liver = 1
     
     # Coag: (platelets) into "sofa_coag"
     sofa_coag = 0
     if (not np.isnan(row['platelets'])):
         if (row['platelets'] < 20):
-            sofa_nervous = 4
+            sofa_coag = 4
         elif (row['platelets'] < 50):
-            sofa_nervous = 3
+            sofa_coag = 3
         elif (row['platelets'] < 100):
-            sofa_nervous = 2
+            sofa_coag = 2
         elif (row['platelets'] < 150):
-            sofa_nervous = 1
+            sofa_coag = 1
     
     # Kidneys: (creatinine and urine output) into "sofa_kidney"
     sofa_kidney = 0
     if (not np.isnan(row['creatinine'])):
         if (row['creatinine'] >= 5):
-            sofa_nervous = 4
+            sofa_kidney = 4
         elif (row['creatinine'] >= 3.4 and row['creatinine'] < 5):
-            sofa_nervous = 3
+            sofa_kidney = 3
         elif (row['creatinine'] >= 2 and row['creatinine'] < 3.4):
-            sofa_nervous = 2
+            sofa_kidney = 2
         elif (row['creatinine'] >= 1.2 and row['creatinine'] < 2):
-            sofa_nervous = 1
+            sofa_kidney = 1
     elif (not np.isnan(row['urine'])):
         if (row['urine'] <= 200):
-            sofa_nervous = 3
+            sofa_kidney = 3
         elif (row['creatinine'] <= 500):
-            sofa_nervous = 4
+            sofa_kidney = 4
             
     temp_sofa_score = sofa_resp + sofa_nervous + sofa_cardio + sofa_liver + sofa_coag + sofa_kidney
     
