@@ -1,8 +1,32 @@
+"""
+Pulls data to calculate SOFA score, qSOFA score, and suspected sepsis
+"""
+
+# Import packages
 import sys
 import numpy as np
 import pandas as pd
 from pandarallel import pandarallel
 
+# Set file paths and inputs
+lead_hrs = sys.argv[1]
+obs_hrs = sys.argv[2]
+inp_filename = f"../relative_{lead_hrs}hr_lead_{obs_hrs}hr_obs_data_set.csv"
+out_filename = f"relative_{lead_hrs}hr_lead_{obs_hrs}hr_obs_SOFA_features.csv"
+nurseCharting_file = "Delirium_eICU/delirium_nurseCharting.csv"
+hr_file = "Delirium_eICU/delirium_hr.csv"
+sbp_file = "Delirium_eICU/delirium_isys.csv"
+dbp_file = "Delirium_eICU/delirium_idias.csv"
+mbp_file = "Delirium_eICU/delirium_imean.csv"
+resp_file = "Delirium_eICU/delirium_resp.csv"
+lab_file = "Delirium_eICU/delirium_lab.csv"
+intakeOutput_file = "Delirium_eICU/delirium_intakeOutput.csv"
+infusionDrug_file = "Delirium_eICU/delirium_infusionDrug.csv"
+medication_file = "Delirium_eICU/delirium_medication.csv"
+treatment_file = "Delirium_eICU/delirium_treatment.csv"
+ventilator_file = "Delirium_eICU/df_vent_event.csv"
+
+## Define relevant functions
 # Add nurseCharting data to features
 def combine_nurseCharting(feature_df, search_string):
     feature_df = feature_df[feature_df['patientunitstayid'].isin(pids['patientunitstayid'])].copy()
@@ -197,47 +221,42 @@ def sepsis(row):
 # Initialization
 pandarallel.initialize(progress_bar = False)
 
-# Pick file
-inp = sys.argv[1]
-inp_filename = f"../relative_1hr_lead_{inp}hr_obs_data_set.csv"
-out_filename = f"relative_1hr_lead_{inp}hr_obs_SOFA_features.csv"
-
 # Read in patient IDs and windows
 pids = pd.read_csv(inp_filename)
 
 # Load Nurse Charting to "nurseCharting"
 # Used for SBP, DBP, MBP, RESP, Temperature, CVP, GCS
-nurseCharting = pd.read_csv("Delirium_eICU/delirium_nurseCharting.csv")
+nurseCharting = pd.read_csv(nurseCharting_file)
 nurseCharting = nurseCharting[nurseCharting['patientunitstayid'].isin(pids['patientunitstayid'])]
 nurseCharting['nursingchartoffset'] = pd.to_numeric(nurseCharting['nursingchartoffset'],errors='coerce')
 nurseCharting['nursingchartvalue'] = pd.to_numeric(nurseCharting['nursingchartvalue'],errors='coerce')
 
 # 1. HR (Heart Rate) to "hr" 
-hr = pd.read_csv("Delirium_eICU/delirium_hr.csv")
+hr = pd.read_csv(hr_file)
 hr = combine_nurseCharting(hr, 'heart rate')
 pids['hr'] = pids.parallel_apply(lambda row: result_nurseCharting(row, hr), axis=1)
 del hr
 
 # 2. SBP (Systolic Blood Pressure) to "sbp"
-sbp = pd.read_csv("Delirium_eICU/delirium_isys.csv")
+sbp = pd.read_csv(sbp_file)
 sbp = combine_nurseCharting(sbp, 'bp systolic')
 pids['sbp'] = pids.parallel_apply(lambda row: result_nurseCharting(row, sbp), axis=1)
 del sbp
 
 # 3. DBP (Diastolic Blood Pressure) to "dbp"
-dbp = pd.read_csv("Delirium_eICU/delirium_idias.csv")
+dbp = pd.read_csv(dbp_file)
 dbp = combine_nurseCharting(dbp, 'bp diastolic')
 pids['dbp'] = pids.parallel_apply(lambda row: result_nurseCharting(row, dbp), axis=1)
 del dbp
 
 # 4. MBP (Mean Blood Pressure) to "mbp"
-mbp = pd.read_csv("Delirium_eICU/delirium_imean.csv")
+mbp = pd.read_csv(mbp_file)
 mbp = combine_nurseCharting(mbp, 'bp mean')
 pids['mbp'] = pids.parallel_apply(lambda row: result_nurseCharting(row, mbp), axis=1)
 del mbp
 
 # 5. RESP (Respiratory Rate) to "resp"
-resp = pd.read_csv("Delirium_eICU/delirium_resp.csv")
+resp = pd.read_csv(resp_file)
 resp = combine_nurseCharting(resp, 'respiratory rate')
 pids['resp'] = pids.parallel_apply(lambda row: result_nurseCharting(row, resp), axis=1)
 del resp
@@ -262,7 +281,7 @@ del nurseCharting
 
 # Load Lab to "lab"
 # Used for PaO2, FiO2, Bilirubin, Platelets, Creatinine, Lactate, BUN, Arterial pH, WBC, PaCO2, Hemoglobin, Hematocrit, Potassium 
-lab = pd.read_csv("Delirium_eICU/delirium_lab.csv")
+lab = pd.read_csv(lab_file)
 lab = lab[lab['patientunitstayid'].isin(pids['patientunitstayid'])]
 
 # 9. PaO2 (Partial Pressure of Oxygen) to "paO2"
@@ -334,7 +353,7 @@ del lab
 
 # Load intakeoutput to "intakeOutput"
 # Used for Urine
-intakeOutput = pd.read_csv("Delirium_eICU/delirium_intakeOutput.csv")
+intakeOutput = pd.read_csv(intakeOutput_file)
 intakeOutput = intakeOutput[intakeOutput['patientunitstayid'].isin(pids['patientunitstayid'])]
 
 # 22. Urine into "urine"
@@ -344,21 +363,21 @@ del intakeOutput, urine
 
 # Load infusiondrug into "infusionDrug"
 # Used for Vasopressors (1)
-infusionDrug = pd.read_csv("Delirium_eICU/delirium_infusionDrug.csv")
+infusionDrug = pd.read_csv(infusionDrug_file)
 infusionDrug = infusionDrug[infusionDrug['patientunitstayid'].isin(pids['patientunitstayid'])]
 infusionDrug.dropna(subset = ['drugname'], inplace = True)
 infusionDrug['infusionoffset'] = pd.to_numeric(infusionDrug['infusionoffset'],errors='coerce')
 
 # Load medication into "medication"
 # Used for Vasopressors (2)
-medication = pd.read_csv("Delirium_eICU/delirium_medication.csv")
+medication = pd.read_csv(medication_file)
 medication = medication[medication['patientunitstayid'].isin(pids['patientunitstayid'])]
 medication.dropna(subset = ['drugname'], inplace = True)
 medication['drugstartoffset'] = pd.to_numeric(medication['drugstartoffset'],errors='coerce')
 
 # Load treatment into "treatment"
 # Used for Vasopressors (3)
-treatment = pd.read_csv("Delirium_eICU/delirium_treatment.csv")
+treatment = pd.read_csv(treatment_file)
 treatment = treatment[treatment['patientunitstayid'].isin(pids['patientunitstayid'])]
 treatment.dropna(subset = ['treatmentstring'], inplace = True)
 treatment['treatmentoffset'] = pd.to_numeric(treatment['treatmentoffset'],errors='coerce')
@@ -375,11 +394,12 @@ pids['vasopressors'] = pids.parallel_apply(lambda row: result_vasopressors(row),
 del vasopressors1, vasopressors2, vasopressors3
 
 # 24. df_vent_event into "ventilator"
-ventilator = pd.read_csv("Delirium_eICU/df_vent_event.csv")
+ventilator = pd.read_csv(ventilator_file)
 ventilator = ventilator[ventilator['patientunitstayid'].isin(pids['patientunitstayid'])]
 ventilator = ventilator[ventilator['event'].str.contains('mechvent', case=False)]
 ventilator['hrs'] = ventilator['hrs']*60
 pids['ventilator'] = pids.parallel_apply(lambda row: result_ventilator(row), axis=1)
+
 del ventilator
 
 pids['sofa_resp'], pids['sofa_nervous'], pids['sofa_cardio'], pids['sofa_liver'], pids['sofa_coag'], pids['sofa_kidney'], pids['sofa_score'] = zip(*pids.parallel_apply(lambda row: SOFA_score(row), axis=1))
