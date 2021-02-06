@@ -10,9 +10,7 @@ from pandarallel import pandarallel
 # Set file paths
 pid_file = "first_24hr_prediction_dataset.csv"
 nurseCharting_file = "Delirium_eICU/delirium_nurseCharting.csv"
-hr_file = "Delirium_eICU/delirium_hr.csv"
 sbp_file = "Delirium_eICU/delirium_isys.csv"
-dbp_file = "Delirium_eICU/delirium_idias.csv"
 mbp_file = "Delirium_eICU/delirium_imean.csv"
 resp_file = "Delirium_eICU/delirium_resp.csv"
 lab_file = "Delirium_eICU/delirium_lab.csv"
@@ -41,26 +39,25 @@ def combine_nurseCharting(feature_df, search_string):
     return feature
 
 # Generate the mean/result of variables found in nurseCharting
-# Used for SBP, DBP, MBP, RESP
+# Used for SBP, MBP, RESP
 def result_nurseCharting(row, df):
     temp = df[df['patientunitstayid'] == row['patientunitstayid']]
     temp = temp[(temp['offset'] >= 0) & (temp['offset'] <= 1440)]
-    return np.mean(temp.dropna(subset = ['value'])['value'])
+    return np.amin(temp.dropna(subset = ['value'])['value'])
 
 # Generate the mean/result of variables found in nurseCharting
-# Used for Temperature, CVP, GCS
+# Used for GCS
 def result_nurseCharting2(row, df):
     temp = df[df['patientunitstayid'] == row['patientunitstayid']]
     temp = temp[(temp['nursingchartoffset'] >= 0) & (temp['nursingchartoffset'] <= 1440)]
-    return np.mean(temp.dropna(subset = ['nursingchartvalue'])['nursingchartvalue'])
+    return np.amin(temp.dropna(subset = ['nursingchartvalue'])['nursingchartvalue'])
 
 # Generate the mean/result of variables found in lab
-# Used for PaO2, FiO2, Bilirubin, Platelets, Creatinine, Lactate, BUN, Arterial pH, 
-# WBC, PaCO2, Hemoglobin, Hematocrit, Potassium 
+# Used for PaO2, FiO2, Bilirubin, Platelets, Creatinine, Lactate
 def result_lab(row, df):
     temp = df[df['patientunitstayid'] == row['patientunitstayid']]
     temp = temp[(temp['labresultrevisedoffset'] >= 0) & (temp['labresultrevisedoffset'] <= 1440)]
-    return np.mean(temp.dropna(subset = ['labresult'])['labresult'])
+    return np.amin(temp.dropna(subset = ['labresult'])['labresult'])
 
 # Generate the mean/result of variables found in intakeOutput
 # Used for Urine
@@ -220,53 +217,31 @@ pids = pd.read_csv(pid_file)
 pids = pids[['patientunitstayid']]
 
 # Load Nurse Charting to "nurseCharting"
-# Used for SBP, DBP, MBP, RESP, Temperature, CVP, GCS
+# Used for SBP, MBP, RESP, GCS
 nurseCharting = pd.read_csv(nurseCharting_file)
 nurseCharting = nurseCharting[nurseCharting['patientunitstayid'].isin(pids['patientunitstayid'])]
 nurseCharting['nursingchartoffset'] = pd.to_numeric(nurseCharting['nursingchartoffset'],errors='coerce')
 nurseCharting['nursingchartvalue'] = pd.to_numeric(nurseCharting['nursingchartvalue'],errors='coerce')
 
-# 1. HR (Heart Rate) to "hr" 
-hr = pd.read_csv(hr_file)
-hr = combine_nurseCharting(hr, 'heart rate')
-pids['hr'] = pids.parallel_apply(lambda row: result_nurseCharting(row, hr), axis=1)
-del hr
-
-# 2. SBP (Systolic Blood Pressure) to "sbp"
+# SBP (Systolic Blood Pressure) to "sbp"
 sbp = pd.read_csv(sbp_file)
 sbp = combine_nurseCharting(sbp, 'bp systolic')
 pids['sbp'] = pids.parallel_apply(lambda row: result_nurseCharting(row, sbp), axis=1)
 del sbp
 
-# 3. DBP (Diastolic Blood Pressure) to "dbp"
-dbp = pd.read_csv(dbp_file)
-dbp = combine_nurseCharting(dbp, 'bp diastolic')
-pids['dbp'] = pids.parallel_apply(lambda row: result_nurseCharting(row, dbp), axis=1)
-del dbp
-
-# 4. MBP (Mean Blood Pressure) to "mbp"
+# MBP (Mean Blood Pressure) to "mbp"
 mbp = pd.read_csv(mbp_file)
 mbp = combine_nurseCharting(mbp, 'bp mean')
 pids['mbp'] = pids.parallel_apply(lambda row: result_nurseCharting(row, mbp), axis=1)
 del mbp
 
-# 5. RESP (Respiratory Rate) to "resp"
+# RESP (Respiratory Rate) to "resp"
 resp = pd.read_csv(resp_file)
 resp = combine_nurseCharting(resp, 'respiratory rate')
 pids['resp'] = pids.parallel_apply(lambda row: result_nurseCharting(row, resp), axis=1)
 del resp
 
-# 6. Temperature (C) to "temperature"
-temperature = nurseCharting[nurseCharting['nursingchartcelltypevalname'] == 'Temperature (C)']
-pids['temperature'] = pids.parallel_apply(lambda row: result_nurseCharting2(row, temperature), axis=1)
-del temperature
-
-# 7. CVP (Central Venous Pressure) to "cvp"
-cvp = nurseCharting[nurseCharting['nursingchartcelltypevallabel'].str.contains("CVP", case = False)]
-pids['cvp'] = pids.parallel_apply(lambda row: result_nurseCharting2(row, cvp), axis=1)
-del cvp
-
-# 8. GCS (Glasgow Coma Score) into "gcs"
+# GCS (Glasgow Coma Score) into "gcs"
 gcs = nurseCharting[nurseCharting['nursingchartcelltypevallabel'] == 'Glasgow coma score']
 gcs = gcs[gcs['nursingchartcelltypevalname'] == 'GCS Total']
 pids['gcs'] = pids.parallel_apply(lambda row: result_nurseCharting2(row, gcs), axis=1)
@@ -275,74 +250,39 @@ del gcs
 del nurseCharting
 
 # Load Lab to "lab"
-# Used for PaO2, FiO2, Bilirubin, Platelets, Creatinine, Lactate, BUN, Arterial pH, WBC, PaCO2, Hemoglobin, Hematocrit, Potassium 
+# Used for PaO2, FiO2, Bilirubin, Platelets, Creatinine, Lactate
 lab = pd.read_csv(lab_file)
 lab = lab[lab['patientunitstayid'].isin(pids['patientunitstayid'])]
 
-# 9. PaO2 (Partial Pressure of Oxygen) to "paO2"
+# PaO2 (Partial Pressure of Oxygen) to "paO2"
 paO2 = lab[lab['labname'] == "paO2"]
 pids['paO2'] = pids.parallel_apply(lambda row: result_lab(row, paO2), axis=1)
 del paO2
 
-# 10. FiO2 (Fraction of Inspired Oxygen) to "fiO2"
+# FiO2 (Fraction of Inspired Oxygen) to "fiO2"
 fiO2 = lab[lab['labname'] == "FiO2"]
 pids['fiO2'] = pids.parallel_apply(lambda row: result_lab(row, fiO2), axis=1)
 del fiO2
 
-# 11. Bilirubin into "bilirubin"
+# Bilirubin into "bilirubin"
 bilirubin = lab[lab['labname'] == "direct bilirubin"]
 pids['bilirubin'] = pids.parallel_apply(lambda row: result_lab(row, bilirubin), axis=1)
 del bilirubin
 
-# 12. Platelets into "platelets"
+# Platelets into "platelets"
 platelets = lab[lab['labname'] == "platelets x 1000"]
 pids['platelets'] = pids.parallel_apply(lambda row: result_lab(row, platelets), axis=1)
 del platelets
 
-# 13. Creatinine into "creatinine"
+# Creatinine into "creatinine"
 creatinine = lab[lab['labname'] == "creatinine"]
 pids['creatinine'] = pids.parallel_apply(lambda row: result_lab(row, creatinine), axis=1)
 del creatinine
 
-# 14. Lactate into "lactate"
+# Lactate into "lactate"
 lactate = lab[lab['labname'] == "lactate"]
 pids['lactate'] = pids.parallel_apply(lambda row: result_lab(row, lactate), axis=1)
 del lactate
-
-# 15. BUN (Blood Urea Nitrogen) into "bun"
-bun = lab[lab['labname'] == "BUN"]
-pids['bun'] = pids.parallel_apply(lambda row: result_lab(row, bun), axis=1)
-del bun
-
-# 16. Arterial pH into "arterial_pH"
-arterial_pH = lab[lab['labname'] == "pH"]
-pids['arterial_pH'] = pids.parallel_apply(lambda row: result_lab(row, arterial_pH), axis=1)
-del arterial_pH
-
-# 17. WBC (White Blood Count) into "wbc"
-wbc = lab[lab['labname'] == "WBC x 1000"]
-pids['wbc'] = pids.parallel_apply(lambda row: result_lab(row, wbc), axis=1)
-del wbc
-
-# 18. PaCO2 (Partial Pressure of Carbon Dioxide) into "paCO2"
-paCO2 = lab[lab['labname'] == "paCO2"]
-pids['paCO2'] = pids.parallel_apply(lambda row: result_lab(row, paCO2), axis=1)
-del paCO2
-
-# 19. Hemoglobin into "hemoglobin"
-hemoglobin = lab[lab['labname'] == "Hgb"]
-pids['hemoglobin'] = pids.parallel_apply(lambda row: result_lab(row, hemoglobin), axis=1)
-del hemoglobin
-
-# 20. Hematocrit into "hematocrit"
-hematocrit = lab[lab['labname'] == "Hct"]
-pids['hematocrit'] = pids.parallel_apply(lambda row: result_lab(row, hematocrit), axis=1)
-del hematocrit
-
-# 21. Potassium into "potassium"
-potassium = lab[lab['labname'] == "potassium"]
-pids['potassium'] = pids.parallel_apply(lambda row: result_lab(row, potassium), axis=1)
-del potassium
 
 del lab
 
@@ -351,7 +291,7 @@ del lab
 intakeOutput = pd.read_csv(intakeOutput_file)
 intakeOutput = intakeOutput[intakeOutput['patientunitstayid'].isin(pids['patientunitstayid'])]
 
-# 22. Urine into "urine"
+# Urine into "urine"
 urine = intakeOutput[intakeOutput['celllabel'] == "Urine"]
 pids['urine'] = pids.apply(lambda row: result_intakeOutput(row, urine), axis=1)
 del intakeOutput, urine
@@ -377,7 +317,7 @@ treatment = treatment[treatment['patientunitstayid'].isin(pids['patientunitstayi
 treatment.dropna(subset = ['treatmentstring'], inplace = True)
 treatment['treatmentoffset'] = pd.to_numeric(treatment['treatmentoffset'],errors='coerce')
 
-# 23. Vasopressors into ""vasopressors1", "vasopressors2", and "vasopressors3"
+# Vasopressors into ""vasopressors1", "vasopressors2", and "vasopressors3"
 vasopressors1 = infusionDrug[infusionDrug['drugname'].str.contains('dopamine|dobutamine|epinephrine|norepinephrine', case=False)]
 vasopressors2 = medication[medication['drugname'].str.contains('dopamine|dobutamine|epinephrine|norepinephrine', case=False)]
 vasopressors3 = treatment[treatment['treatmentstring'].str.contains('dopamine|dobutamine|epinephrine|norepinephrine', case=False)]
@@ -388,7 +328,7 @@ pids['vasopressors'] = pids.parallel_apply(lambda row: result_vasopressors(row),
 
 del vasopressors1, vasopressors2, vasopressors3
 
-# 24. df_vent_event into "ventilator"
+# df_vent_event into "ventilator"
 ventilator = pd.read_csv(ventilator_file)
 ventilator = ventilator[ventilator['patientunitstayid'].isin(pids['patientunitstayid'])]
 ventilator = ventilator[ventilator['event'].str.contains('mechvent', case=False)]
