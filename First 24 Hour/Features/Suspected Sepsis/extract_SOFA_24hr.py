@@ -38,35 +38,35 @@ def combine_nurseCharting(feature_df, search_string):
     feature = pd.concat([feature_df, df]) 
     return feature
 
-# Generate the mean/result of variables found in nurseCharting
+# Generate the result of variables found in nurseCharting
 # Used for SBP, MBP, RESP
 def result_nurseCharting(row, df):
     temp = df[df['patientunitstayid'] == row['patientunitstayid']]
     temp = temp[(temp['offset'] >= 0) & (temp['offset'] <= 1440)]
     return np.amin(temp.dropna(subset = ['value'])['value'])
 
-# Generate the mean/result of variables found in nurseCharting
+# Generate the result of variables found in nurseCharting
 # Used for GCS
 def result_nurseCharting2(row, df):
     temp = df[df['patientunitstayid'] == row['patientunitstayid']]
     temp = temp[(temp['nursingchartoffset'] >= 0) & (temp['nursingchartoffset'] <= 1440)]
     return np.amin(temp.dropna(subset = ['nursingchartvalue'])['nursingchartvalue'])
 
-# Generate the mean/result of variables found in lab
+# Generate the result of variables found in lab
 # Used for PaO2, FiO2, Bilirubin, Platelets, Creatinine, Lactate
 def result_lab(row, df):
     temp = df[df['patientunitstayid'] == row['patientunitstayid']]
     temp = temp[(temp['labresultrevisedoffset'] >= 0) & (temp['labresultrevisedoffset'] <= 1440)]
     return np.amin(temp.dropna(subset = ['labresult'])['labresult'])
 
-# Generate the mean/result of variables found in intakeOutput
+# Generate the result of variables found in intakeOutput
 # Used for Urine
 def result_intakeOutput(row, df):
     temp = df[df['patientunitstayid'] == row['patientunitstayid']]
     temp = temp[(temp['intakeoutputoffset'] >= 0) & (temp['intakeoutputoffset'] <= 1440)]
     return np.sum(temp.dropna(subset = ['cellvaluenumeric'])['cellvaluenumeric'])
 
-# Generate the mean/result of vasopressors
+# Generate the result of vasopressors
 def result_vasopressors(row):
     vs1 = vasopressors1[vasopressors1['patientunitstayid'] == row['patientunitstayid']]
     vs1 = vs1[(vs1['infusionoffset'] >= 0) & (vs1['infusionoffset'] <= 1440)]
@@ -76,7 +76,7 @@ def result_vasopressors(row):
     vs3 = vs3[(vs3['treatmentoffset'] >= 0) & (vs3['treatmentoffset'] <= 1440)]
     return ((len(vs1)+len(vs2)+len(vs3)) > 0)
 
-# Generate the mean/result of ventilator
+# Generate the result of ventilator
 def result_ventilator(row):
     temp = ventilator[ventilator['patientunitstayid'] == row['patientunitstayid']]
     temp = temp[(temp['hrs'] >= 0) & (temp['hrs'] <= 1440)]
