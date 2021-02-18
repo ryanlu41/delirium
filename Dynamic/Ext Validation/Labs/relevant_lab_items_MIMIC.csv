@@ -1,0 +1,52 @@
+ROW_ID,ITEMID,LABEL,FLUID,CATEGORY,LOINC_CODE,labname
+63,50862,albumin,Blood,Chemistry,1751-7,albumin
+64,50863,alkaline_phos,Blood,Chemistry,6768-6,alkaline phos.
+62,50861,ALT_SGPT,Blood,Chemistry,1742-6,ALT (SGPT)
+69,50868,anion_gap,Blood,Chemistry,1863-0,anion gap
+79,50878,AST_SGOT,Blood,Chemistry,1920-8,AST (SGOT)
+,,,,,,bedside glucose
+83,50882,bicarbonate,Blood,Chemistry,1963-8,bicarbonate_totalCO2_HCO2
+4,50803,bicarbonate,Blood,Blood Gas,1959-6,bicarbonate_totalCO2_HCO2
+206,51006,BUN,Blood,Chemistry,3094-0,BUN
+94,50893,calcium,Blood,Chemistry,2000-8,calcium
+9,50808,calcium,Blood,Blood Gas,1994-3,calcium
+103,50902,chloride,Blood,Chemistry,2075-0,chloride
+7,50806,chloride,Blood,Blood Gas,2069-3,chloride
+113,50912,creatinine,Blood,Chemistry,2160-0,creatinine
+17,50816,FiO2,Blood,Blood Gas,19994-3,FiO2
+729,51529,glucose,BLOOD,CHEMISTRY,,glucose
+10,50809,glucose,Blood,Blood Gas,2339-0,glucose
+132,50931,glucose,Blood,Chemistry,2345-7,glucose
+421,51221,Hct,Blood,Hematology,4544-3,Hct
+11,50810,Hct,Blood,Blood Gas,20570-8,Hct
+12,50811,Hgb,Blood,Blood Gas,718-7,Hgb
+56,50855,Hgb,Blood,Chemistry,718-7,Hgb
+422,51222,Hgb,Blood,Hematology,718-7,Hgb
+14,50813,lactate,Blood,Blood Gas,32693-4,lactate
+444,51244,lymphs,Blood,Hematology,731-0,-lymphs
+445,51245,lymphs,Blood,Hematology,26478-8,-lymphs
+161,50960,magnesium,Blood,Chemistry,2601-3,magnesium
+448,51248,MCH,Blood,Hematology,785-6,MCH
+449,51249,MCHC,Blood,Hematology,786-4,MCHC
+450,51250,MCV,Blood,Hematology,787-2,MCV
+454,51254,monos,Blood,Hematology,742-7,-monos
+,,,,,,MPV
+18,50817,O2_Sat_percent,Blood,Blood Gas,20564-1,O2 Sat (%)
+19,50818,paCO2,Blood,Blood Gas,11557-6,paCO2
+22,50821,paO2,Blood,Blood Gas,11556-8,paO2
+21,50820,pH,Blood,Blood Gas,11558-4,pH
+171,50970,phosphate,Blood,Chemistry,2777-1,phosphate
+465,51265,platelets_x_1000,Blood,Hematology,777-3,platelets x 1000
+172,50971,potassium,Blood,Chemistry,2823-3,potassium
+23,50822,potassium,Blood,Blood Gas,6298-4,potassium
+474,51274,PT,Blood,Hematology,5902-2,PT
+437,51237,PT_INR,Blood,Hematology,5895-7,PT - INR
+479,51279,RBC,Blood,Hematology,789-8,RBC
+477,51277,RDW,Blood,Hematology,788-0,RDW
+184,50983,sodium,Blood,Chemistry,2951-2,sodium
+25,50824,sodium,Blood,Blood Gas,2947-0,sodium
+86,50885,total_bilirubin,Blood,Chemistry,1975-2,total bilirubin
+177,50976,total_protein,Blood,Chemistry,2885-2,total protein
+500,51300,WBC_x_1000,Blood,Hematology,26464-8,WBC x 1000
+501,51301,WBC_x_1000,Blood,Hematology,804-5,WBC x 1000
+3,50802,Base_Excess,Blood,Blood Gas,11555-0,
