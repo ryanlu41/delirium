@@ -154,9 +154,9 @@ def SOFA_score(row):
             sofa_kidney = 1
     elif (not np.isnan(row['urine'])):
         if (row['urine'] <= 200):
-            sofa_kidney = 3
-        elif (row['creatinine'] <= 500):
             sofa_kidney = 4
+        elif (row['urine'] <= 500):
+            sofa_kidney = 3
             
     temp_sofa_score = sofa_resp + sofa_nervous + sofa_cardio + sofa_liver + sofa_coag + sofa_kidney
     
