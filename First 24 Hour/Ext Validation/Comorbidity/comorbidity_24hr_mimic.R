@@ -6,8 +6,8 @@ library(magrittr)
 # Read in diagnosis table
 diagnosis = read.csv('DIAGNOSES_ICD.csv')
 
-infile = paste0('first_24hr_prediction_dataset.csv')
-outfile = paste0('MIMIC_comorbidity.csv')
+infile = paste0('MIMIC_first_24hr_prediction_dataset.csv')
+outfile = paste0('MIMIC_first_24hr_comorbidity.csv')
 pids = read.csv(infile) %>%
   select(HADM_ID, ICUSTAY_ID) %>%
   arrange(HADM_ID)
