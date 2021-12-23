@@ -15,14 +15,18 @@ import TwentyFourHrDrugFeaturesFunction as df
 import os.path
 import glob
 
+from pathlib import Path
 
+file_path = Path(__file__)
+parent_path = file_path.parent
+dataset_path = file_path.parent.parent.parent.joinpath('Dataset')
 
-comp = pd.read_csv('complete_patientstayid_list.csv')
+comp = pd.read_csv(dataset_path.joinpath('complete_patientstayid_list.csv'))
 
 #define all the paths. 
-drugPathList = glob.glob(r'C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\Medications\DrugNameLists\*')
+drugPathList = glob.glob(str(parent_path.joinpath('DrugNameLists','*')))
 
-treatmentPathList = glob.glob(r'C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\Medications\TreatmentStrings\*')
+treatmentPathList = glob.glob(str(parent_path.joinpath('TreatmentStrings','*')))
 
 #error checking
 if len(drugPathList)!=len(treatmentPathList):
@@ -37,6 +41,7 @@ for path in treatmentPathList:
         raise NameError(path+" is not a valid file path")
 
 for i in range(1,len(drugPathList)):
-    comp = pd.concat(objs=[comp,df.TwentyFourHourDrugFeature(drugPathList[i],treatmentPathList[i])],axis = 1)
+    comp = pd.concat(objs=[comp,df.TwentyFourHourDrugFeature(
+        drugPathList[i],treatmentPathList[i])],axis = 1)
     
-comp.to_csv(r'C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\Medications\24hrsAllDrugFeatures.csv')
+comp.to_csv('24hrsAllDrugFeatures.csv')
