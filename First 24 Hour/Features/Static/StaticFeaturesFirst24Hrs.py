@@ -12,15 +12,29 @@ Will pull from the Patient, Hospital, and ApachePatientResult,
 #%% Packages
 import numpy as np
 import pandas as pd
-import time as time
+from time import time
+from pathlib import Path
+
+start = time()
+file_path = Path(__file__)
+dataset_path = file_path.parent.parent.parent.joinpath('Dataset')
+eicu_path = file_path.parent.parent.parent.parent.joinpath('eicu')
 
 #%% Load in needed data.
 
-comp = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\complete_patientstayid_list.csv")
+comp = pd.read_csv(dataset_path.joinpath("complete_patientstayid_list.csv"))
 comp.rename(columns={'PatientStayID':'patientunitstayid'},inplace=True)
-pat = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\patient.csv",usecols=['patientunitstayid','age','gender','ethnicity','apacheadmissiondx','admissionheight','hospitaladmittime24','hospitaladmitoffset','hospitaladmitsource','unittype','unitadmittime24','unitadmitsource','unitvisitnumber','unitstaytype','admissionweight','hospitalid'])
-hosp = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\hospital.csv")
-apache = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\apachepatientresult.csv",usecols=['patientunitstayid','apachescore','apacheversion'])
+pat = pd.read_csv(eicu_path.joinpath("patient.csv")
+                  ,usecols=['patientunitstayid','age','gender','ethnicity',
+                            'apacheadmissiondx','admissionheight',
+                            'hospitaladmittime24','hospitaladmitoffset',
+                            'hospitaladmitsource','unittype','unitadmittime24',
+                            'unitadmitsource','unitvisitnumber','unitstaytype',
+                            'admissionweight','hospitalid'])
+hosp = pd.read_csv(eicu_path.joinpath("hospital.csv"))
+apache = pd.read_csv(eicu_path.joinpath("apachepatientresult.csv"),
+                     usecols=['patientunitstayid','apachescore',
+                               'apacheversion'])
 
 #%% Get apache scores.
 apache = apache[apache['apacheversion']=='IVa']
