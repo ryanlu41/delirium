@@ -6,18 +6,28 @@ This code generates the AKI feature for the 24 hour prediction model, by
 looking at AKI diagnoses in the first 24 hours. Strings to search for were 
 determined with physician input from Dr. Stevens.
 
+runtime: a few seconds
+
 @author: Kirby
 """
 
 import numpy as np
 import pandas as pd
+from pathlib import Path
+
+
+file_path = Path(__file__)
+dataset_path = file_path.parent.parent.parent.joinpath('Dataset')
+eicu_path = file_path.parent.parent.parent.parent.joinpath('eicu')
 
 #Load the IDs of the patients we care about.
-comp = pd.read_csv('complete_patientstayid_list.csv')
+comp = pd.read_csv(dataset_path.joinpath('complete_patientstayid_list.csv'))
 comp.rename(columns={'PatientStayID':'patientunitstayid'},inplace=True)
 
 #Get diagnosis information.
-diag = pd.read_csv('diagnosis.csv',usecols=['patientunitstayid','diagnosisoffset','diagnosisstring','icd9code'])
+diag = pd.read_csv(eicu_path.joinpath('diagnosis.csv'),
+                   usecols=['patientunitstayid','diagnosisoffset',
+                            'diagnosisstring','icd9code'])
 #Only keep the stays that had delirium testing.
 diag = diag[diag['patientunitstayid'].isin(comp['patientunitstayid'])]
 
@@ -30,14 +40,16 @@ diag = diag.applymap(lambda s:s.lower() if type(s) == str else s)
 #Only keep AKI related diagnoses
 # strings = diag[['diagnosisstring']]
 # strings.drop_duplicates(inplace=True)
-search_terms_list = ['acute renal failure','traumatic renal injury'] #Tried aki, got nothing.
-diag = diag[diag['diagnosisstring'].str.contains('|'.join(search_terms_list),na=False)]
+search_terms_list = ['acute renal failure',
+                     'traumatic renal injury'] #Tried aki, got nothing.
+diag = diag[diag['diagnosisstring'].str.contains('|'.join(search_terms_list),
+                                                 na=False)]
 
 #Just get the stay IDs
 diag = diag[['patientunitstayid']]
 diag.drop_duplicates(inplace=True)
 
-#Create a column for the infection feature
+#Create a column for the feature
 
 comp['24hr_AKI'] = comp['patientunitstayid'].isin(diag['patientunitstayid'])
 comp.to_csv('AKI_24hours.csv',index=False)
