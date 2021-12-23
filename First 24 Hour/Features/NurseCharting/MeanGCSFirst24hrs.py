@@ -13,16 +13,32 @@ import numpy as np
 import pandas as pd
 import os
 #import multiprocessing as mp
-import time
+from time import time
+from pathlib import Path
+
+start = time()
+filepath = Path(__file__)
+eicu_path = filepath.parent.parent.parent.parent.joinpath('eicu')
+dataset_path = filepath.parent.parent.parent.joinpath('Dataset')
 
 #%% Load in and prepare relevant data.
-comp = pd.read_csv('complete_patientstayid_list.csv')
+comp = pd.read_csv(dataset_path.joinpath('complete_patientstayid_list.csv'))
 comp.rename(columns={'PatientStayID':'patientunitstayid'},inplace=True)
 
 #Just get GCS data.
-GCS_data = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\nurseCharting.csv",nrows=0,usecols=['patientunitstayid','nursingchartoffset','nursingchartcelltypevallabel','nursingchartcelltypevalname','nursingchartvalue'])
+GCS_data = pd.read_csv(eicu_path.joinpath("nurseCharting.csv"),
+                       nrows=0,
+                       usecols=['patientunitstayid','nursingchartoffset',
+                                'nursingchartcelltypevallabel',
+                                'nursingchartcelltypevalname',
+                                'nursingchartvalue'])
 keep_list = ['Glasgow coma score','Score (Glasgow Coma Scale)']
-for chunk in pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\nurseCharting.csv",chunksize=500000,usecols=['patientunitstayid','nursingchartoffset','nursingchartcelltypevallabel','nursingchartcelltypevalname','nursingchartvalue']):
+for chunk in pd.read_csv(eicu_path.joinpath("nurseCharting.csv"),
+                         chunksize=1000000,
+                         usecols=['patientunitstayid','nursingchartoffset',
+                                  'nursingchartcelltypevallabel',
+                                  'nursingchartcelltypevalname',
+                                  'nursingchartvalue']):
     temp_rows = chunk[chunk['nursingchartcelltypevallabel'].isin(keep_list)]
     GCS_data = pd.concat([GCS_data,temp_rows])
 
@@ -35,8 +51,10 @@ GCS_data = GCS_data[GCS_data['nursingchartoffset']>=0]
 GCS_data = GCS_data[GCS_data['nursingchartoffset']<=1440]
 
 #Make the data all numeric.
-GCS_data['patientunitstayid'] = pd.to_numeric(GCS_data['patientunitstayid'],errors='coerce')
-GCS_data['nursingchartvalue'] = pd.to_numeric(GCS_data['nursingchartvalue'],errors='coerce')
+GCS_data['patientunitstayid'] = pd.to_numeric(GCS_data['patientunitstayid'],
+                                              errors='coerce')
+GCS_data['nursingchartvalue'] = pd.to_numeric(GCS_data['nursingchartvalue'],
+                                              errors='coerce')
 
 #Split out data for the different parts.
 motor_data = GCS_data[GCS_data['nursingchartcelltypevalname']=='Motor']
@@ -73,5 +91,8 @@ comp = comp.merge(mean_total,how='left',on='patientunitstayid')
 
 
 #Save off results.
-comp = comp[['patientunitstayid','24hrMeanMotor','24hrMeanVerbal','24hrMeanEyes','24hrMeanTotal']]
+comp = comp[['patientunitstayid','24hrMeanMotor','24hrMeanVerbal',
+             '24hrMeanEyes','24hrMeanTotal']]
 comp.to_csv('first_24hr_GCS_feature.csv',index=False)
+
+calc_time = time() - start
