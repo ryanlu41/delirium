@@ -5,17 +5,25 @@ Created on Wed Mar 11 19:57:28 2020
 #This pulls the mean, min and max of each lab for each patient in the first
 24 hr predictive model. 
 
-Run time:
+Run time: 25 min for 39 labs.
 @author: Kirby
 """
 
-
+#%% Package setup.
 import numpy as np
 import pandas as pd
 import os
 #import multiprocessing as mp
-import time
 import statistics as stat
+from pathlib import Path
+from time import time
+
+#%%Inputs.
+file_path = Path(__file__)
+dataset_path = file_path.parent.parent.parent.joinpath('Dataset')
+
+#performance testing.
+start = time()
 
 #Get list of lab names
 lab_list = pd.read_csv("LabsList.csv")
@@ -25,37 +33,39 @@ lab_list = pd.read_csv("LabsList.csv")
 lab_list = lab_list.transpose()
 lab_list = lab_list.values.tolist()[0]
 
+final = pd.read_csv(dataset_path.joinpath("complete_patientstayid_list.csv"))
+final.rename(columns={'PatientStayID':'patientunitstayid'},inplace=True)
+
+#%% Calculate lab features.
 #Receive a lab name to look for.
 for lab_name in lab_list:
     
+    #Progress report
+    print(lab_name)
+    
     #Pulls list of Stay IDs and offsets we care about.
-    ids = pd.read_csv("complete_patientstayid_list.csv")
+    ids = pd.read_csv(dataset_path.joinpath("complete_patientstayid_list.csv"))
     ids.rename(columns={'PatientStayID':'patientunitstayid'},inplace=True)
     ids['start'] = 0
     ids['end'] = 1440
     
     #Load the list of the relevant labs
-    script_dir = os.path.dirname(__file__)
     folder = "AllLabsBeforeDelirium"
-    full_file_path = os.path.join(script_dir,folder,lab_name+".csv")
-    labs = pd.read_csv(full_file_path,usecols=['patientunitstayid','labresultoffset','labresult'])
+    full_file_path = os.path.join(folder,lab_name+".csv")
+    labs = pd.read_csv(full_file_path,usecols=['patientunitstayid',
+                                               'labresultoffset','labresult'])
     
-    start_timer = time.time()
     #Generates a dictionary of patientunitstayid -> dataframe of labs relevant to that ID.
     labs_dict = {}
     #Vectorize this? 
     for row in ids.itertuples(index=False):
         current_ID = row[0]
         #Get the labs with the right patient stay ID.
-        rel_labs = labs[labs['patientunitstayid']==current_ID][['labresultoffset','labresult']]
-        rel_labs = rel_labs.set_index(['labresultoffset']).to_dict().get('labresult')
+        rel_labs = labs[labs['patientunitstayid']==current_ID][
+            ['labresultoffset','labresult']]
+        rel_labs = rel_labs.set_index(['labresultoffset']).to_dict().get(
+            'labresult')
         labs_dict.update({current_ID:rel_labs})
-    
-    #For performance testing.    
-    dict_timer = time.time() - start_timer
-    
-    #Vectorized version. 
-    start_timer = time.time()
     
     #Gets an array of relevant labs, using ID, start times, and end times.
     #Returns a list of those lab values.
@@ -74,7 +84,9 @@ for lab_name in lab_list:
             return list(relevant_labs_copy.values())
     
     #Generate column of list of values for each ID.
-    ids['relevant_'+lab_name] = ids.apply(lambda row:get_rel_labs(row['patientunitstayid'],row['start'],row['end']),axis=1)
+    ids['relevant_'+lab_name] = ids.apply(
+        lambda row:get_rel_labs(row['patientunitstayid'],row['start'],
+                                row['end']),axis=1)
     
     #Generate columns of mean, min, and max for each ID. 
     def get_mean(labs):
@@ -95,18 +107,28 @@ for lab_name in lab_list:
         else:
             return max(labs)
     
-    ids['mean_'+lab_name] = ids.apply(lambda row:get_mean(row['relevant_'+lab_name]),axis=1)
-    ids['min_'+lab_name] = ids.apply(lambda row:get_min(row['relevant_'+lab_name]),axis=1)
-    ids['max_'+lab_name] = ids.apply(lambda row:get_max(row['relevant_'+lab_name]),axis=1)
+    ids['mean_'+lab_name] = ids.apply(lambda row:get_mean(
+        row['relevant_'+lab_name]),axis=1)
+    ids['min_'+lab_name] = ids.apply(lambda row:get_min(
+        row['relevant_'+lab_name]),axis=1)
+    ids['max_'+lab_name] = ids.apply(lambda row:get_max(
+        row['relevant_'+lab_name]),axis=1)
     
-    #For performance testing. 
-    calculation_timer = time.time()-start_timer
+    #Get difference of last and second to last lab. 
+    labs['diff'] = labs.groupby('patientunitstayid').diff()['labresult']
+    diff_labs = labs.groupby('patientunitstayid').last().reset_index(drop=False)
+    diff_labs.rename(columns={'diff':'diff_'+lab_name},inplace=True)
+    ids = ids.merge(diff_labs,how='left',on='patientunitstayid')
     
     #Drop the unneed columns. 
-    ids = ids[['patientunitstayid','mean_'+lab_name, 'min_'+lab_name, 'max_'+lab_name]]
+    ids = ids[['patientunitstayid','mean_'+lab_name, 'min_'+lab_name, 
+               'max_'+lab_name]]
     
     #Save off results.
-    script_dir = os.path.dirname(__file__)
-    folder = "First24hrsFeatureData"
-    full_file_path = os.path.join(script_dir,folder,lab_name+".csv")
-    ids.to_csv(full_file_path,index=False)
+    final = final.merge(ids,on='patientunitstayid',how='left')
+    
+
+final.to_csv('first_24_hour_lab_features.csv',index=False)
+
+#For performance testing. 
+calculation_timer = time()-start

@@ -10,23 +10,26 @@ and offset. Called by AllLabsBeforeDelirium.py
 
 def labs_before_delirium(lab_name):
        
-    import numpy as np
     import pandas as pd
+    from pathlib import Path
     
+    file_path = Path(__file__)
+    dataset_path = file_path.parent.parent.parent.joinpath("Dataset")
+    eicu_path = file_path.parent.parent.parent.parent.joinpath('eicu')
     #Pulls list of Stay IDs.
-    comp = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\complete_patientstayid_list.csv")
+    comp = pd.read_csv(dataset_path.joinpath("complete_patientstayid_list.csv"))
     
     # Pull Delirium Onset Times from csv, which were obtained in SQL. 
-    del_start = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\DeliriumStartTimes.csv")
+    del_start = pd.read_csv(dataset_path.joinpath("DeliriumStartTimes.csv"))
     # make it into a dictionary of ID -> delirium start time.
     del_start.set_index("patientunitstayid", drop=True, inplace=True)
     del_start_dict = del_start.to_dict(orient="dict")
     del_start_dict = del_start_dict.get("deliriumstartoffset")
     
-    #Pulls all lab info. 
-    lab = pd.read_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\eicu\lab.csv")
-    #Drop columns we don't need.
-    lab = lab[['patientunitstayid','labresultoffset','labname','labresult']]
+    #Pulls all lab info and drop columns we don't need.
+    lab = pd.read_csv(eicu_path.joinpath("lab.csv"),
+                      usecols=['patientunitstayid','labresultoffset',
+                               'labname','labresult'])
     #Only keeps the lab we want.
     lab = lab[lab['labname']==lab_name]
     #Only keeps the patient stays we want.
@@ -37,7 +40,8 @@ def labs_before_delirium(lab_name):
     lab = lab[lab['labresultoffset'] >= 0]
     #Only keep labs that happened before the delirium start time. 
     #If there was never delirium, keep all the labs.
-    lab = lab[(lab['labresultoffset'] < lab['deliriumstart']) | (lab['deliriumstart'].isna()) ]
+    lab = lab[(lab['labresultoffset'] < lab['deliriumstart']) | (
+        lab['deliriumstart'].isna()) ]
     lab.sort_values(by=['patientunitstayid','labresultoffset'],inplace=True)
     return lab
 
@@ -46,4 +50,4 @@ if __name__ == '__main__':
     #String for lab_name must exactly match the labname used in the Lab table of eICU.
     lab_name = 'BUN'
     test = labs_before_delirium(lab_name)
-    test.to_csv(r"C:\Users\Kirby\OneDrive\JHU\Precision Care Medicine\LabFeatures\AllLabsBeforeDelirium\\" + lab_name + ".csv",index=False)
+    test.to_csv(lab_name + ".csv",index=False)
