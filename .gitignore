@@ -1,0 +1,6 @@
+.venv/
+.vscode/
+eicu/*
+mimic-iii-1.4/*
+!eicu/*.md
+!mimic-iii-1.4/*.md
