@@ -1,0 +1,775 @@
+,lab,mean,var,median,IQR,min,max,n
+0,fibrinogen,"0    1370.557392
+dtype: float64","0    1.250679e+07
+dtype: float64",478.0,1064.5,"0    1
+dtype: int64","0    149784
+dtype: int64",21719
+1,PT - INR,"0    1814.576763
+dtype: float64","0    9.720525e+06
+dtype: float64",1410.0,715.0,"0    1
+dtype: int64","0    477665
+dtype: int64",277613
+2,magnesium,"0    1510.763253
+dtype: float64","0    3.604416e+06
+dtype: float64",1393.0,791.0,"0    1
+dtype: int64","0    211640
+dtype: int64",511436
+3,PT,"0    1814.358789
+dtype: float64","0    9.661775e+06
+dtype: float64",1411.0,708.0,"0    1
+dtype: int64","0    477665
+dtype: int64",268152
+4,pH,"0    1070.095138
+dtype: float64","0    7.031190e+09
+dtype: float64",357.0,1024.0,"0    1
+dtype: int64","0    47319220
+dtype: int64",318967
+5,urinary creatinine,"0    4593.841431
+dtype: float64","0    5.598791e+07
+dtype: float64",1833.0,5160.5,"0    1
+dtype: int64","0    130819
+dtype: int64",2264
+6,MCH,"0    1411.73114
+dtype: float64","0    1.246728e+06
+dtype: float64",1416.0,525.0,"0    1
+dtype: int64","0    96552
+dtype: int64",883131
+7,BUN,"0    1324.718512
+dtype: float64","0    2.566983e+09
+dtype: float64",1390.0,768.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",1077314
+8,urinary sodium,"0    4912.769912
+dtype: float64","0    5.533608e+07
+dtype: float64",2276.0,4860.75,"0    1
+dtype: int64","0    112038
+dtype: int64",2938
+9,HCO3,"0    1097.794796
+dtype: float64","0    7.454338e+09
+dtype: float64",371.0,1054.0,"0    1
+dtype: int64","0    47319220
+dtype: int64",300852
+10,lactate,"0    1165.369953
+dtype: float64","0    1.969166e+07
+dtype: float64",383.0,725.0,"0    1
+dtype: int64","0    526086
+dtype: int64",133252
+11,CPK,"0    1240.308944
+dtype: float64","0    1.291504e+07
+dtype: float64",480.0,834.0,"0    1
+dtype: int64","0    348425
+dtype: int64",58386
+12,PTT,"0    1348.212339
+dtype: float64","0    9.530497e+06
+dtype: float64",538.0,1018.0,"0    1
+dtype: int64","0    253680
+dtype: int64",192814
+13,FiO2,"0    1154.24336
+dtype: float64","0    8.588437e+09
+dtype: float64",439.0,1143.0,"0    1
+dtype: int64","0    47319220
+dtype: int64",261033
+14,-lymphs,"0    1739.887864
+dtype: float64","0    4.208522e+06
+dtype: float64",1433.0,325.0,"0    1
+dtype: int64","0    145136
+dtype: int64",484901
+15,Base Deficit,"0    921.513227
+dtype: float64","0    6.813352e+06
+dtype: float64",294.0,774.0,"0    1
+dtype: int64","0    101545
+dtype: int64",45777
+16,BNP,"0    3523.790518
+dtype: float64","0    2.385104e+07
+dtype: float64",1631.0,2758.25,"0    1
+dtype: int64","0    124589
+dtype: int64",14870
+17,chloride,"0    1307.598193
+dtype: float64","0    2.533610e+09
+dtype: float64",1385.0,792.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",1091510
+18,uric acid,"0    2116.812563
+dtype: float64","0    1.775929e+07
+dtype: float64",1436.0,263.0,"0    1
+dtype: int64","0    149162
+dtype: int64",6989
+19,troponin - I,"0    906.02249
+dtype: float64","0    7.727583e+06
+dtype: float64",407.0,265.0,"0    1
+dtype: int64","0    296289
+dtype: int64",120051
+20,paO2,"0    1068.960818
+dtype: float64","0    6.936202e+09
+dtype: float64",357.0,1023.0,"0    1
+dtype: int64","0    47319220
+dtype: int64",323337
+21,-eos,"0    1832.29046
+dtype: float64","0    4.875973e+06
+dtype: float64",1438.0,307.0,"0    1
+dtype: int64","0    151085
+dtype: int64",440798
+22,platelets x 1000,"0    1398.995524
+dtype: float64","0    1.258356e+06
+dtype: float64",1413.0,581.0,"0    1
+dtype: int64","0    96552
+dtype: int64",959019
+23,anion gap,"0    1343.384543
+dtype: float64","0    3.175486e+09
+dtype: float64",1393.0,757.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",870818
+24,LPM O2,"0    2434.409216
+dtype: float64","0    1.991138e+07
+dtype: float64",1047.5,2173.25,"0    1
+dtype: int64","0    98168
+dtype: int64",10916
+25,MCV,"0    1409.68268
+dtype: float64","0    1.247379e+06
+dtype: float64",1416.0,537.0,"0    1
+dtype: int64","0    96552
+dtype: int64",920740
+26,paCO2,"0    1067.517557
+dtype: float64","0    6.995043e+09
+dtype: float64",355.0,1019.0,"0    1
+dtype: int64","0    47319220
+dtype: int64",320616
+27,RBC,"0    1417.586723
+dtype: float64","0    1.290367e+06
+dtype: float64",1416.0,531.0,"0    1
+dtype: int64","0    131486
+dtype: int64",943063
+28,RDW,"0    1423.527979
+dtype: float64","0    1.344903e+06
+dtype: float64",1417.0,529.0,"0    1
+dtype: int64","0    96552
+dtype: int64",871592
+29,MCHC,"0    1410.272697
+dtype: float64","0    1.247425e+06
+dtype: float64",1416.0,536.0,"0    1
+dtype: int64","0    96552
+dtype: int64",920279
+30,alkaline phos.,"0    2083.162321
+dtype: float64","0    9.457383e+06
+dtype: float64",1438.0,422.0,"0    1
+dtype: int64","0    329809
+dtype: int64",292070
+31,WBC x 1000,"0    1416.385113
+dtype: float64","0    1.272662e+06
+dtype: float64",1416.0,532.0,"0    1
+dtype: int64","0    96552
+dtype: int64",945080
+32,creatinine,"0    1320.688932
+dtype: float64","0    2.552301e+09
+dtype: float64",1389.0,771.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",1083513
+33,calcium,"0    1337.545632
+dtype: float64","0    2.666963e+09
+dtype: float64",1392.0,763.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",1036934
+34,Hgb,"0    1229.126591
+dtype: float64","0    1.488682e+06
+dtype: float64",1360.0,923.0,"0    1
+dtype: int64","0    525001
+dtype: int64",1101035
+35,bicarbonate,"0    1323.455731
+dtype: float64","0    2.723192e+09
+dtype: float64",1388.0,779.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",1015494
+36,potassium,"0    1158.926164
+dtype: float64","0    3.877796e+09
+dtype: float64",1088.0,998.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",1291103
+37,-polys,"0    1758.972657
+dtype: float64","0    4.283138e+06
+dtype: float64",1433.0,333.0,"0    1
+dtype: int64","0    151085
+dtype: int64",426469
+38,-monos,"0    1743.9909
+dtype: float64","0    4.226031e+06
+dtype: float64",1433.0,322.0,"0    1
+dtype: int64","0    145136
+dtype: int64",481098
+39,CPK-MB,"0    882.408981
+dtype: float64","0    1.207290e+07
+dtype: float64",426.0,257.0,"0    1
+dtype: int64","0    348425
+dtype: int64",36300
+40,total bilirubin,"0    2062.663086
+dtype: float64","0    9.202666e+06
+dtype: float64",1437.0,419.0,"0    1
+dtype: int64","0    329809
+dtype: int64",290760
+41,-basos,"0    1852.928141
+dtype: float64","0    5.137958e+06
+dtype: float64",1438.0,310.0,"0    1
+dtype: int64","0    151085
+dtype: int64",419237
+42,phosphate,"0    1595.926351
+dtype: float64","0    4.489660e+06
+dtype: float64",1416.0,693.0,"0    1
+dtype: int64","0    374617
+dtype: int64",332129
+43,ALT (SGPT),"0    2081.940499
+dtype: float64","0    9.476260e+06
+dtype: float64",1437.0,427.0,"0    1
+dtype: int64","0    329809
+dtype: int64",294834
+44,Hct,"0    1251.367278
+dtype: float64","0    1.399747e+06
+dtype: float64",1372.0,886.0,"0    1
+dtype: int64","0    414902
+dtype: int64",1082216
+45,AST (SGOT),"0    2077.393254
+dtype: float64","0    9.401419e+06
+dtype: float64",1437.0,432.0,"0    1
+dtype: int64","0    329809
+dtype: int64",296818
+46,glucose,"0    1266.410427
+dtype: float64","0    2.464117e+09
+dtype: float64",1371.0,868.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",1122532
+47,total protein,"0    2084.579209
+dtype: float64","0    9.556616e+06
+dtype: float64",1437.0,429.0,"0    1
+dtype: int64","0    329809
+dtype: int64",293780
+48,sodium,"0    1203.316267
+dtype: float64","0    2.321870e+09
+dtype: float64",1334.0,973.0,"0    1
+dtype: int64","0    52578382
+dtype: int64",1191325
+49,albumin,"0    1939.38685
+dtype: float64","0    7.190771e+06
+dtype: float64",1433.0,446.0,"0    1
+dtype: int64","0    301135
+dtype: int64",360403
+50,salicylate,"0    404.987671
+dtype: float64","0    653038.563634
+dtype: float64",231.5,277.0,"0    2
+dtype: int64","0    18006
+dtype: int64",730
+51,Acetaminophen,"0    606.668879
+dtype: float64","0    1.025279e+06
+dtype: float64",381.0,491.25,"0    1
+dtype: int64","0    24182
+dtype: int64",1356
+52,ethanol,"0    697.472881
+dtype: float64","0    1.446684e+06
+dtype: float64",404.0,474.0,"0    2
+dtype: int64","0    16124
+dtype: int64",590
+53,WBC's in urine,"0    7904.576636
+dtype: float64","0    1.439788e+08
+dtype: float64",5123.5,8444.25,"0    1
+dtype: int64","0    431544
+dtype: int64",5624
+54,bedside glucose,"0    308.785843
+dtype: float64","0    661132.707465
+dtype: float64",255.0,219.0,"0    1
+dtype: int64","0    840143
+dtype: int64",2937005
+55,urinary specific gravity,"0    6698.926463
+dtype: float64","0    7.739348e+07
+dtype: float64",4447.0,7352.5,"0    1
+dtype: int64","0    431544
+dtype: int64",26395
+56,direct bilirubin,"0    2907.104381
+dtype: float64","0    3.278817e+07
+dtype: float64",1458.0,1521.0,"0    1
+dtype: int64","0    387237
+dtype: int64",38915
+57,Total CO2,"0    950.892593
+dtype: float64","0    3.071812e+06
+dtype: float64",501.0,1276.0,"0    1
+dtype: int64","0    99450
+dtype: int64",142458
+58,Base Excess,"0    1160.505814
+dtype: float64","0    8.917674e+09
+dtype: float64",385.0,1123.0,"0    1
+dtype: int64","0    47319220
+dtype: int64",251460
+59,folate,"0    9279.291417
+dtype: float64","0    2.439926e+08
+dtype: float64",2880.0,9387.0,"0    1
+dtype: int64","0    123985
+dtype: int64",501
+60,ammonia,"0    2834.156149
+dtype: float64","0    2.055309e+07
+dtype: float64",1461.0,1661.0,"0    1
+dtype: int64","0    131260
+dtype: int64",13026
+61,TSH,"0    6048.700022
+dtype: float64","0    1.194212e+08
+dtype: float64",2400.0,6310.0,"0    1
+dtype: int64","0    299342
+dtype: int64",4537
+62,Vitamin B12,"0    8735.416237
+dtype: float64","0    1.981336e+08
+dtype: float64",3274.0,9551.75,"0    1
+dtype: int64","0    143920
+dtype: int64",776
+63,-bands,"0    2409.334698
+dtype: float64","0    1.121316e+07
+dtype: float64",1455.0,1499.0,"0    1
+dtype: int64","0    139462
+dtype: int64",48599
+64,LDL,"0    3402.690681
+dtype: float64","0    8.457703e+07
+dtype: float64",1378.0,2024.0,"0    1
+dtype: int64","0    197189
+dtype: int64",1513
+65,total cholesterol,"0    3647.233164
+dtype: float64","0    5.741334e+07
+dtype: float64",1451.0,3351.0,"0    1
+dtype: int64","0    197189
+dtype: int64",2955
+66,HDL,"0    3244.600512
+dtype: float64","0    6.501739e+07
+dtype: float64",1383.0,1964.0,"0    1
+dtype: int64","0    197189
+dtype: int64",2343
+67,triglycerides,"0    4312.254623
+dtype: float64","0    2.846919e+07
+dtype: float64",2855.0,4246.5,"0    1
+dtype: int64","0    197189
+dtype: int64",13899
+68,Carboxyhemoglobin,"0    1076.458419
+dtype: float64","0    6.425354e+06
+dtype: float64",418.0,1216.0,"0    1
+dtype: int64","0    115264
+dtype: int64",73760
+69,O2 Sat (%),"0    1128.009254
+dtype: float64","0    8.837665e+09
+dtype: float64",363.0,1073.0,"0    1
+dtype: int64","0    47319220
+dtype: int64",253736
+70,Methemoglobin,"0    1045.256933
+dtype: float64","0    6.357475e+06
+dtype: float64",392.0,1196.0,"0    1
+dtype: int64","0    115264
+dtype: int64",76008
+71,ionized calcium,"0    1083.948892
+dtype: float64","0    1.156858e+07
+dtype: float64",421.0,1279.0,"0    1
+dtype: int64","0    525015
+dtype: int64",104934
+72,TIBC,"0    10080.856798
+dtype: float64","0    1.594187e+08
+dtype: float64",5778.0,11727.0,"0    3
+dtype: int64","0    118513
+dtype: int64",1243
+73,Vancomycin - trough,"0    3731.556851
+dtype: float64","0    1.985686e+07
+dtype: float64",2855.0,2668.0,"0    3
+dtype: int64","0    145502
+dtype: int64",19041
+74,Fe/TIBC Ratio,"0    10215.440895
+dtype: float64","0    1.966996e+08
+dtype: float64",5547.0,11083.0,"0    3
+dtype: int64","0    158163
+dtype: int64",939
+75,Fe,"0    9520.338363
+dtype: float64","0    1.652417e+08
+dtype: float64",5015.0,11145.5,"0    1
+dtype: int64","0    158163
+dtype: int64",1723
+76,prealbumin,"0    6848.524804
+dtype: float64","0    5.672131e+07
+dtype: float64",5749.0,7971.0,"0    1
+dtype: int64","0    301426
+dtype: int64",8809
+77,lipase,"0    2632.239874
+dtype: float64","0    2.529901e+07
+dtype: float64",1440.0,1015.0,"0    1
+dtype: int64","0    232276
+dtype: int64",13036
+78,CRP,"0    5572.671097
+dtype: float64","0    7.660486e+07
+dtype: float64",2913.0,7056.25,"0    1
+dtype: int64","0    301424
+dtype: int64",4740
+79,ESR,"0    5413.868227
+dtype: float64","0    4.944964e+07
+dtype: float64",2789.0,5619.0,"0    27
+dtype: int64","0    88180
+dtype: int64",2436
+80,LDH,"0    2579.734811
+dtype: float64","0    2.691213e+07
+dtype: float64",1436.0,704.0,"0    1
+dtype: int64","0    168625
+dtype: int64",10781
+81,Vancomycin - random,"0    3039.147646
+dtype: float64","0    2.555024e+07
+dtype: float64",1625.0,1525.0,"0    5
+dtype: int64","0    285389
+dtype: int64",10769
+82,Tacrolimus-FK506,"0    1854.499375
+dtype: float64","0    2.985868e+06
+dtype: float64",1450.0,186.0,"0    1
+dtype: int64","0    37490
+dtype: int64",5603
+83,protein S,"0    3612.428571
+dtype: float64","0    1.510471e+07
+dtype: float64",2191.0,4119.0,"0    1
+dtype: int64","0    11429
+dtype: int64",14
+84,Digoxin,"0    3944.136656
+dtype: float64","0    2.885611e+07
+dtype: float64",2093.0,3177.0,"0    1
+dtype: int64","0    68134
+dtype: int64",2949
+85,protein C,"0    5753.636364
+dtype: float64","0    3.095932e+07
+dtype: float64",4311.0,3609.5,"0    114
+dtype: int64","0    19305
+dtype: int64",11
+86,CRP-hs,"0    3724.630363
+dtype: float64","0    2.350757e+07
+dtype: float64",1907.0,2895.0,"0    1
+dtype: int64","0    39526
+dtype: int64",303
+87,Respiratory Rate,"0    1388.638312
+dtype: float64","0    5.714876e+07
+dtype: float64",774.0,1167.0,"0    1
+dtype: int64","0    1032835
+dtype: int64",31024
+88,free T4,"0    6712.733952
+dtype: float64","0    8.683864e+07
+dtype: float64",3671.0,7076.0,"0    1
+dtype: int64","0    146149
+dtype: int64",1293
+89,WBC's in cerebrospinal fluid,"0    3507.573308
+dtype: float64","0    1.919449e+07
+dtype: float64",2072.0,4026.0,"0    1
+dtype: int64","0    40476
+dtype: int64",1064
+90,protein - CSF,"0    4309.55115
+dtype: float64","0    1.864561e+07
+dtype: float64",2891.0,4052.0,"0    1
+dtype: int64","0    40444
+dtype: int64",1261
+91,glucose - CSF,"0    4281.597711
+dtype: float64","0    1.764694e+07
+dtype: float64",2889.0,4009.5,"0    1
+dtype: int64","0    40446
+dtype: int64",1223
+92,haptoglobin,"0    4747.664609
+dtype: float64","0    1.019380e+08
+dtype: float64",1506.0,3630.25,"0    1
+dtype: int64","0    213068
+dtype: int64",972
+93,reticulocyte count,"0    4998.307031
+dtype: float64","0    6.726308e+07
+dtype: float64",2146.5,4062.25,"0    7
+dtype: int64","0    154083
+dtype: int64",1280
+94,Ferritin,"0    9850.020221
+dtype: float64","0    1.771695e+08
+dtype: float64",5261.0,11355.0,"0    1
+dtype: int64","0    158163
+dtype: int64",1088
+95,WBC's in synovial fluid,"0    2122.428571
+dtype: float64","0    9.885887e+06
+dtype: float64",654.0,2922.0,"0    1
+dtype: int64","0    10267
+dtype: int64",14
+96,urinary osmolality,"0    2937.414951
+dtype: float64","0    2.951880e+07
+dtype: float64",1236.5,2709.5,"0    1
+dtype: int64","0    112011
+dtype: int64",2234
+97,serum osmolality,"0    947.870048
+dtype: float64","0    2.468173e+06
+dtype: float64",487.0,1025.0,"0    1
+dtype: int64","0    41515
+dtype: int64",19261
+98,transferrin,"0    10307.354478
+dtype: float64","0    1.308802e+08
+dtype: float64",10029.0,6770.25,"0    4
+dtype: int64","0    158163
+dtype: int64",536
+99,24 h urine urea nitrogen,"0    6812.913043
+dtype: float64","0    1.186302e+08
+dtype: float64",1016.0,9589.5,"0    2
+dtype: int64","0    38712
+dtype: int64",23
+100,amylase,"0    2857.169737
+dtype: float64","0    2.535017e+07
+dtype: float64",1441.0,1679.5,"0    1
+dtype: int64","0    109965
+dtype: int64",5320
+101,myoglobin,"0    910.846633
+dtype: float64","0    3.984594e+06
+dtype: float64",355.0,572.5,"0    1
+dtype: int64","0    28447
+dtype: int64",1604
+102,cortisol,"0    4068.757062
+dtype: float64","0    2.123455e+08
+dtype: float64",1043.0,3283.5,"0    1
+dtype: int64","0    436290
+dtype: int64",1239
+103,Phenytoin,"0    2413.963862
+dtype: float64","0    8.788085e+06
+dtype: float64",1463.0,1453.5,"0    1
+dtype: int64","0    56090
+dtype: int64",3459
+104,prolactin,"0    2982.553571
+dtype: float64","0    2.487676e+07
+dtype: float64",1315.0,1948.0,"0    1
+dtype: int64","0    27016
+dtype: int64",56
+105,Phenobarbital,"0    2821.38674
+dtype: float64","0    1.355686e+07
+dtype: float64",1485.0,1507.25,"0    1
+dtype: int64","0    27612
+dtype: int64",362
+106,Tobramycin - random,"0    2936.266423
+dtype: float64","0    8.052530e+06
+dtype: float64",1870.5,3200.0,"0    1
+dtype: int64","0    19127
+dtype: int64",274
+107,24 h urine protein,"0    6278.143868
+dtype: float64","0    5.498447e+07
+dtype: float64",4296.0,7037.75,"0    16
+dtype: int64","0    73299
+dtype: int64",424
+108,Theophylline,"0    3317.443038
+dtype: float64","0    2.465177e+07
+dtype: float64",1492.0,1997.0,"0    1
+dtype: int64","0    54881
+dtype: int64",237
+109,Gentamicin - random,"0    2835.177778
+dtype: float64","0    7.698846e+06
+dtype: float64",1836.0,1858.0,"0    68
+dtype: int64","0    27249
+dtype: int64",315
+110,Lidocaine,"0    2012.65493
+dtype: float64","0    2.482712e+07
+dtype: float64",1299.5,1183.75,"0    1
+dtype: int64","0    57737
+dtype: int64",142
+111,Lithium,"0    1901.100551
+dtype: float64","0    2.110754e+07
+dtype: float64",667.0,1168.0,"0    1
+dtype: int64","0    79253
+dtype: int64",726
+112,T3,"0    4513.767442
+dtype: float64","0    7.347209e+07
+dtype: float64",2066.0,2905.75,"0    19
+dtype: int64","0    69869
+dtype: int64",86
+113,Gentamicin - peak,"0    3369.42236
+dtype: float64","0    6.884583e+06
+dtype: float64",2931.0,2836.0,"0    88
+dtype: int64","0    20330
+dtype: int64",161
+114,Cyclosporin,"0    2516.473318
+dtype: float64","0    5.634060e+06
+dtype: float64",1475.0,1454.5,"0    1
+dtype: int64","0    20117
+dtype: int64",431
+115,Vent Rate,"0    1129.958382
+dtype: float64","0    4.260437e+06
+dtype: float64",686.0,1191.0,"0    1
+dtype: int64","0    101545
+dtype: int64",40223
+116,Carbamazepine,"0    2594.361404
+dtype: float64","0    2.997169e+07
+dtype: float64",1179.0,1678.0,"0    6
+dtype: int64","0    63207
+dtype: int64",285
+117,Tobramycin - peak,"0    4893.773585
+dtype: float64","0    1.974489e+07
+dtype: float64",4324.0,3032.0,"0    110
+dtype: int64","0    31754
+dtype: int64",53
+118,Tobramycin - trough,"0    4510.307692
+dtype: float64","0    1.470584e+07
+dtype: float64",3690.0,3767.25,"0    498
+dtype: int64","0    31447
+dtype: int64",104
+119,T4,"0    4985.737864
+dtype: float64","0    7.814516e+07
+dtype: float64",1764.0,3408.5,"0    12
+dtype: int64","0    69869
+dtype: int64",103
+120,Gentamicin - trough,"0    3759.785714
+dtype: float64","0    7.239454e+06
+dtype: float64",2985.0,3336.0,"0    27
+dtype: int64","0    14091
+dtype: int64",350
+121,RPR titer,"Series([], dtype: float64)","Series([], dtype: float64)",,,"Series([], dtype: float64)","Series([], dtype: float64)",0
+122,Legionella pneumophila Ab,"Series([], dtype: float64)","Series([], dtype: float64)",,,"Series([], dtype: float64)","Series([], dtype: float64)",0
+123,T3RU,"0    4241.684211
+dtype: float64","0    2.754892e+07
+dtype: float64",3112.0,4506.0,"0    51
+dtype: int64","0    21828
+dtype: int64",19
+124,PEEP,"0    1586.74316
+dtype: float64","0    2.584624e+10
+dtype: float64",644.0,1174.0,"0    1
+dtype: int64","0    47319220
+dtype: int64",86700
+125,CPK-MB INDEX,"0    886.434617
+dtype: float64","0    2.249356e+07
+dtype: float64",425.0,279.0,"0    1
+dtype: int64","0    348425
+dtype: int64",15241
+126,MPV,"0    1425.325517
+dtype: float64","0    1.358930e+06
+dtype: float64",1418.0,506.0,"0    1
+dtype: int64","0    96552
+dtype: int64",639909
+127,Temperature,"0    1038.369387
+dtype: float64","0    5.102667e+06
+dtype: float64",400.0,1120.0,"0    1
+dtype: int64","0    116974
+dtype: int64",83828
+128,TV,"0    1141.219632
+dtype: float64","0    2.734692e+07
+dtype: float64",730.0,1190.0,"0    1
+dtype: int64","0    1032835
+dtype: int64",68856
+129,ANF/ANA,"0    9910.714286
+dtype: float64","0    8.117441e+07
+dtype: float64",9027.0,11913.0,"0    1565
+dtype: int64","0    26003
+dtype: int64",7
+130,troponin - T,"0    894.709335
+dtype: float64","0    6.708919e+06
+dtype: float64",405.0,231.0,"0    1
+dtype: int64","0    105043
+dtype: int64",24327
+131,Pressure Support,"0    1711.973383
+dtype: float64","0    1.105251e+07
+dtype: float64",755.0,1261.0,"0    1
+dtype: int64","0    77747
+dtype: int64",13563
+132,WBC's in body fluid,"0    5860.853186
+dtype: float64","0    8.196086e+07
+dtype: float64",2887.0,6681.0,"0    1
+dtype: int64","0    98727
+dtype: int64",361
+133,Peak Airway/Pressure,"0    1398.421053
+dtype: float64","0    1.137857e+07
+dtype: float64",629.0,1211.0,"0    1
+dtype: int64","0    169448
+dtype: int64",5719
+134,Clostridium difficile toxin A+B,"0    9137.083333
+dtype: float64","0    4.489180e+07
+dtype: float64",6732.5,3097.5,"0    2890
+dtype: int64","0    27552
+dtype: int64",12
+135,Mode,"0    2097.59322
+dtype: float64","0    1.675844e+07
+dtype: float64",422.5,1695.25,"0    1
+dtype: int64","0    22558
+dtype: int64",118
+136,PTT ratio,"0    1407.983802
+dtype: float64","0    2.061014e+07
+dtype: float64",664.0,1083.0,"0    1
+dtype: int64","0    237439
+dtype: int64",7470
+137,Oxyhemoglobin,"0    1018.885975
+dtype: float64","0    7.499522e+06
+dtype: float64",279.0,805.5,"0    1
+dtype: int64","0    104989
+dtype: int64",25819
+138,Spontaneous Rate,"0    1854.078301
+dtype: float64","0    1.037998e+07
+dtype: float64",1001.0,1408.5,"0    1
+dtype: int64","0    83380
+dtype: int64",6143
+139,Device,"0    1300.711564
+dtype: float64","0    7.058240e+06
+dtype: float64",127.0,1499.25,"0    1
+dtype: int64","0    46304
+dtype: int64",1522
+140,WBC's in pleural fluid,"0    8256.78
+dtype: float64","0    1.346757e+08
+dtype: float64",2685.5,12570.75,"0    1
+dtype: int64","0    51843
+dtype: int64",50
+141,Vancomycin - peak,"0    2909.0
+dtype: float64","0   NaN
+dtype: float64",2909.0,0.0,"0    2909
+dtype: int64","0    2909
+dtype: int64",1
+142,Site,"0    1599.209677
+dtype: float64","0    3.316829e+06
+dtype: float64",954.5,1507.75,"0    35
+dtype: int64","0    7174
+dtype: int64",62
+143,Pressure Control,"0    1322.964744
+dtype: float64","0    9.483097e+06
+dtype: float64",361.5,1309.25,"0    1
+dtype: int64","0    56947
+dtype: int64",1248
+144,serum ketones,"0    838.963446
+dtype: float64","0    3.340355e+06
+dtype: float64",397.0,543.0,"0    3
+dtype: int64","0    23020
+dtype: int64",383
+145,O2 Content,"0    1069.208612
+dtype: float64","0    6.730643e+06
+dtype: float64",422.0,1188.0,"0    1
+dtype: int64","0    115264
+dtype: int64",49211
+146,cd 4,"0    8546.384615
+dtype: float64","0    9.587856e+07
+dtype: float64",4298.0,10501.0,"0    1
+dtype: int64","0    29055
+dtype: int64",26
+147,WBC's in peritoneal fluid,"0    7400.383333
+dtype: float64","0    9.301778e+07
+dtype: float64",4632.5,7957.75,"0    1
+dtype: int64","0    48838
+dtype: int64",60
+148,WBC's in pericardial fluid,"0    1292.0
+dtype: float64","0    3317888.0
+dtype: float64",1292.0,1288.0,"0    4
+dtype: int64","0    2580
+dtype: int64",2
+149,Amikacin - trough,"0    4047.2
+dtype: float64","0    5.553016e+06
+dtype: float64",3735.0,2987.0,"0    408
+dtype: int64","0    10392
+dtype: int64",45
+150,Amikacin - random,"0    3016.808081
+dtype: float64","0    1.014528e+07
+dtype: float64",1810.0,1883.0,"0    316
+dtype: int64","0    20761
+dtype: int64",99
+151,NAPA,"0    1470.0
+dtype: float64","0   NaN
+dtype: float64",1470.0,0.0,"0    1470
+dtype: int64","0    1470
+dtype: int64",1
+152,Procainamide,"0    1470.0
+dtype: float64","0   NaN
+dtype: float64",1470.0,0.0,"0    1470
+dtype: int64","0    1470
+dtype: int64",1
+153,Amikacin - peak,"0    3136.3
+dtype: float64","0    2.371189e+06
+dtype: float64",2895.5,2219.5,"0    286
+dtype: int64","0    6200
+dtype: int64",20
+154,Vent Other,"0    2145.342581
+dtype: float64","0    2.335692e+07
+dtype: float64",810.0,1720.0,"0    1
+dtype: int64","0    85964
+dtype: int64",829
+155,HSV 1&2 IgG AB titer,"Series([], dtype: float64)","Series([], dtype: float64)",,,"Series([], dtype: float64)","Series([], dtype: float64)",0
+156,HIV 1&2 AB,"Series([], dtype: float64)","Series([], dtype: float64)",,,"Series([], dtype: float64)","Series([], dtype: float64)",0
+157,HSV 1&2 IgG AB,"0    830.0
+dtype: float64","0   NaN
+dtype: float64",830.0,0.0,"0    830
+dtype: int64","0    830
+dtype: int64",1
