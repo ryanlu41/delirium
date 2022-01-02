@@ -5,5 +5,5 @@ mimic-iii-1.4/*
 !eicu/*.md
 !mimic-iii-1.4/*.md
 ./*.csv
-First 24 Hour/Features/Labs/Old*
+First 24 Hour/Features/Labs/*.ipynb
 .~lock*
