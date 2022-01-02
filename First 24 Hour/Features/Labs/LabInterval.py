@@ -1,13 +1,13 @@
 
 
 # %% Package setup and loading data
-from pathlib import PurePath
+from pathlib import Path
 import os
 import numpy as np
 import pandas as pd
 
-file_path = PurePath(os.getcwd())
-dataset_path = file_path.parent.parent.parent.joinpath('eicu')
+file_path = Path(__file__)
+dataset_path = file_path.parent.parent.parent.parent.joinpath('eicu')
 lab_file = pd.read_csv(dataset_path.joinpath('lab.csv'), usecols=[
     'patientunitstayid', 'labresultoffset', 'labname', 'labresultrevisedoffset'])
 d_lab_file = pd.read_csv(dataset_path.joinpath('lab_delirium.csv'), usecols=[
@@ -128,10 +128,10 @@ for lab in range(158):
 d_freq_stats_df = pd.DataFrame(d_freq_stats, columns = ["lab", "mean_freq", "var_freq", "median_freq", "IQR_freq", "min_freq", "max_freq"])
 d_count_stats_df = pd.DataFrame(d_count_stats, columns = ["lab", "mean_count", "var_count", "median_count", "total labs", "n patients w/ lab"])
 # %%
-freq_stats_df.to_csv(file_path.joinpath('Lab_Frequency.csv'))
-d_freq_stats_df.to_csv(file_path.joinpath('Lab_Frequency_delirium.csv'))
+freq_stats_df.to_csv(file_path.parent.joinpath('Lab_Frequency.csv'))
+d_freq_stats_df.to_csv(file_path.parent.joinpath('Lab_Frequency_delirium.csv'))
 
-count_stats_df.to_csv(file_path.joinpath('Lab_Count.csv'))
-d_count_stats_df.to_csv(file_path.joinpath('Lab_Count_delirium.csv'))
+count_stats_df.to_csv(file_path.parent.joinpath('Lab_Count.csv'))
+d_count_stats_df.to_csv(file_path.parent.joinpath('Lab_Count_delirium.csv'))
 
 
