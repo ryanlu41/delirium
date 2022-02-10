@@ -7,7 +7,7 @@
 # - freq of abn
 # - linear regression of labs
 #     - use for past labs too
-#     
+# - break into different modules
 
 #%% Package setup.
 import numpy as np
@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 import time
 from scipy import stats
 from sklearn import linear_model, metrics, model_selection, ensemble
+from sklearn import model_selection
 
 # %%
 def abn_dist(lab, result, norm_dict):
@@ -44,7 +45,6 @@ def mean_interval(df: pd.Series):
 
 # %%
 file_path = Path(__file__)
-dataset_path = file_path.parent.parent.parent.joinpath('Dataset')
 eicu_path = file_path.parent.parent.parent.parent.joinpath('eicu')
 
 # %%
@@ -105,74 +105,70 @@ norm_dict.update(unused_norm)
 # - CRP-hs: < 0.2 mg/dL
 # - T3: 70 - 195 ng/dL
 # - Clostridium difficile toxin A+B: 
+# %%
+if (eicu_path.joinpath('FeatureTable.csv').is_file()):
+    final_df = pd.read_csv(eicu_path.joinpath('FeatureTable.csv'))
+    d_start_times = pd.read_csv(eicu_path.joinpath('DeliriumStartTimes.csv'), index_col='patientunitstayid')
+    ground_truth = d_start_times['deliriumstartoffset'] >= 0
+    ground_truth.fillna(0)
+else:
+    lab_file = pd.read_csv(eicu_path.joinpath('lab_delirium.csv'), usecols=[
+        'patientunitstayid', 'labresultoffset', 'labname', 'labresult'
+        ])
+
+    d_start_times = pd.read_csv(eicu_path.joinpath('DeliriumStartTimes.csv'), index_col='patientunitstayid')
+    ground_truth = d_start_times['deliriumstartoffset'] >= 0
+    ground_truth.fillna(0)
+
+    filled_start = d_start_times['deliriumstartoffset'].fillna(10000)
+
+
+    lab_file = lab_file[lab_file['labresultoffset'] >= 0]
+    lab_file = lab_file[lab_file['labname'].isin(norm_dict)]
+
+    lab_file['deliriumstartoffset'] = lab_file['patientunitstayid'].apply(filled_start.get)
+    lab_file['relativelabresultoffset'] = lab_file['labresultoffset'] - lab_file['deliriumstartoffset'] + lead_offset
+
+
+    lab_file = lab_file[(lab_file['relativelabresultoffset'] <= 0)]
+    # lab_file = lab_file[(lab_file['relativelabresultoffset'] >= obs_offset) * (lab_file['relativelabresultoffset'] <= 0)]
+    lab_file['abndistance'] = lab_file.apply(lambda x: abn_dist(x.labname, x.labresult, norm_dict), axis=1)
+
+    result_df = lab_file.groupby(['patientunitstayid', 'labname'])['labresult'].agg(['last', 'mean', 'var', 'median', 'min', 'max'])
+    result_df.reset_index(inplace=True)
+    linreg_df = lab_file.groupby(['patientunitstayid','labname'])[['relativelabresultoffset', 'labresult']].apply(df_linreg)
+    result_df[['slope', 'intercept']] = pd.DataFrame(linreg_df.to_list(), columns=['slope', 'intercept'])
+    result_df.set_index(['patientunitstayid', 'labname'], inplace=True)
+
+    abn_labs = lab_file[lab_file['abndistance'].apply(bool)]
+    abn_labs_sorted = abn_labs.sort_values([
+        'patientunitstayid', 'labname', 'labresultoffset'
+        ]).groupby(['patientunitstayid', 'labname'])
+    abn_df = pd.concat([-abn_labs_sorted['relativelabresultoffset'].max(), abn_labs_sorted['abndistance'].max(), abn_labs_sorted['labresultoffset'].agg(mean_interval)], axis=1)
+    abn_df.rename(columns={'relativelabresultoffset': 'timesinceabn', 'abndistance': 'maxabndistance', 'labresultoffset' : 'avgabninterval'}, inplace=True)
+    # abn_df.reset_index(inplace=True)
+    abn_df.fillna({'avgabninterval': 0}, inplace=True)
+
+
+
+    has_lab_stats = pd.concat([result_df, abn_df], axis=1)
+
+    has_lab_stats['haslab'] = 1
+
+    # imputed_df = has_lab_stats.copy().set_index('labname')
+    # for lab, group in has_lab_stats.groupby('labname'):
+    final_arr = []
+    for id in d_start_times.index:
+        for lab in norm_dict:
+            final_arr.append([id, lab])
+    final_df = pd.DataFrame(final_arr, columns=['patientunitstayid', 'labname'])
+    final_df = pd.concat([final_df.set_index(['patientunitstayid', 'labname']), has_lab_stats], axis=1)
+    final_df.reset_index(inplace=True)
+
+    final_df.to_csv(eicu_path.joinpath('FeatureTable.csv'))
 
 # %%
-lab_file = pd.read_csv(eicu_path.joinpath('lab_delirium.csv'), usecols=[
-    'patientunitstayid', 'labresultoffset', 'labname', 'labresult'
-    ])
-
-d_start_times = pd.read_csv(eicu_path.joinpath('DeliriumStartTimes.csv'), index_col='patientunitstayid')
-ground_truth = d_start_times['deliriumstartoffset'] >= 0
-ground_truth.fillna(0)
-
-filled_start = d_start_times['deliriumstartoffset'].fillna(10000)
-
-
-# %%
-lab_file = lab_file[lab_file['labresultoffset'] >= 0]
-lab_file = lab_file[lab_file['labname'].isin(norm_dict)]
-
-
-# %%
-lab_file['deliriumstartoffset'] = lab_file['patientunitstayid'].apply(filled_start.get)
-lab_file['relativelabresultoffset'] = lab_file['labresultoffset'] - lab_file['deliriumstartoffset'] + lead_offset
-
-
-# %%
-lab_file = lab_file[(lab_file['relativelabresultoffset'] <= 0)]
-# lab_file = lab_file[(lab_file['relativelabresultoffset'] >= obs_offset) * (lab_file['relativelabresultoffset'] <= 0)]
-lab_file['abndistance'] = lab_file.apply(lambda x: abn_dist(x.labname, x.labresult, norm_dict), axis=1)
-
-
-
-
-# %%
-result_df = lab_file.groupby(['patientunitstayid', 'labname'])['labresult'].agg(['last', 'mean', 'var', 'median', 'min', 'max'])
-result_df.reset_index(inplace=True)
-linreg_df = lab_file.groupby(['patientunitstayid','labname'])[['relativelabresultoffset', 'labresult']].apply(df_linreg)
-result_df[['slope', 'intercept']] = pd.DataFrame(linreg_df.to_list(), columns=['slope', 'intercept'])
-result_df.set_index(['patientunitstayid', 'labname'], inplace=True)
-
-# %%
-abn_labs = lab_file[lab_file['abndistance'].apply(bool)]
-abn_labs_sorted = abn_labs.sort_values([
-    'patientunitstayid', 'labname', 'labresultoffset'
-    ]).groupby(['patientunitstayid', 'labname'])
-abn_df = pd.concat([-abn_labs_sorted['relativelabresultoffset'].max(), abn_labs_sorted['abndistance'].max(), abn_labs_sorted['labresultoffset'].agg(mean_interval)], axis=1)
-abn_df.rename(columns={'relativelabresultoffset': 'timesinceabn', 'abndistance': 'maxabndistance', 'labresultoffset' : 'avgabninterval'}, inplace=True)
-# abn_df.reset_index(inplace=True)
-abn_df.fillna({'avgabninterval': 0}, inplace=True)
-
-
-# %%
-has_lab_stats = pd.concat([result_df, abn_df], axis=1)
-
-# %%
-has_lab_stats['haslab'] = 1
-
-# %%
-means = has_lab_stats.groupby(['labname']).mean()
-
-# imputed_df = has_lab_stats.copy().set_index('labname')
-# for lab, group in has_lab_stats.groupby('labname'):
-final_arr = []
-for id in d_start_times.index:
-    for lab in norm_dict:
-        final_arr.append([id, lab])
-final_df = pd.DataFrame(final_arr, columns=['patientunitstayid', 'labname'])
-final_df = pd.concat([final_df.set_index(['patientunitstayid', 'labname']), has_lab_stats], axis=1)
-final_df.reset_index(inplace=True)
-
+means = final_df.groupby(['labname']).mean()
 imputed_df = final_df.copy().set_index('labname')
 for lab, group in final_df.groupby(['labname']):
     norm_val = np.mean(norm_dict[lab])
@@ -205,17 +201,14 @@ full_data_df.index.rename('patientunitstayid', inplace=True)
 full_data_df.reset_index(inplace=True)
 
 # %%
-final_df.to_csv(dataset_path.joinpath('FeatureTable.csv'))
-
-# %%
 full_metrics_arr = []
-X = full_data_df
+X = full_data_df.copy()
 Y = X['patientunitstayid'].apply(ground_truth.get)
 X.set_index('patientunitstayid', inplace=True)
 if sum(Y) > 1:
     kf = model_selection.KFold(n_splits=5)
     for train_index, test_index in kf.split(X):
-        metrics_vec = [lab]
+        metrics_vec = ['full']
         X_train, X_test = X.iloc[train_index], X.iloc[test_index]
         Y_train, Y_test = Y.iloc[train_index], Y.iloc[test_index]
 
@@ -232,6 +225,9 @@ if sum(Y) > 1:
         metrics_vec.extend([train_AUC, test_AUC, test_acc])
 
         gbm = ensemble.GradientBoostingClassifier().fit(X_train, Y_train)
+        # pregbm = ensemble.GradientBoostingClassifier()
+        # parameters = 
+        # gbm = model_selection.GridSearchCV(pregbm, parameters).fit(X_train, Y_train)
         Y_train_scores = gbm.decision_function(X_train)
         fpr, tpr, thresholds = metrics.roc_curve(Y_train, Y_train_scores)
         train_AUC = metrics.auc(fpr, tpr)
@@ -244,7 +240,7 @@ if sum(Y) > 1:
         metrics_vec.extend([train_AUC, test_AUC, test_acc])
         full_metrics_arr.append(metrics_vec)
 else:
-    full_metrics_arr.append([lab, np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, np.NaN])
+    full_metrics_arr.append(['full', np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, np.NaN])
 
 plt.plot(fpr, tpr)
 # %%

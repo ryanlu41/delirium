@@ -6,4 +6,10 @@ mimic-iii-1.4/*
 !mimic-iii-1.4/*.md
 ./*.csv
 First 24 Hour/Features/Labs/*.ipynb
+First 24 Hour/Features/Labs/*.csv
 .~lock*
+.win_venv/
+*__pycache__
+Dynamic/Features/Labs/AllLabsBeforeDelirium/*.csv
+Dynamic/Features/Labs/*.ipynb
+Dynamic/Dataset/FeatureTable.csv
