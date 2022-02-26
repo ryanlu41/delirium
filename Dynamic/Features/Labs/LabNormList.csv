@@ -1,40 +1,55 @@
-﻿labname, low, high
-albumin, 3.5, 5.4
-alkaline phos., 36, 150
-ALT (SGPT), 0, 35
-anion gap
-AST (SGOT), 0, 20
-bedside glucose, 70, 105
-BUN
-calcium, 9, 10.5
-chloride, 98, 106
-creatinine, 0.5, 1.2
-FiO2
-glucose
-Hct
-Hgb
-lactate
--lymphs
-magnesium
-MCH
-MCHC
-MCV
--monos
-MPV
-O2 Sat (%)
-paCO2
-paO2
-pH, 7.32, 7.45
-phosphate
-platelets x 1000, 150, 350
--polys
-potassium, 3.5, 5
-PT, 11, 13
-PT - INR
-RBC
-RDW
-sodium
-total bilirubin, 0.3, 1.2
-total protein
-WBC x 1000, 4.5, 11
-bicarbonate_totalCO2_HCO3
+labname, low, high
+albumin,3.5,5.4
+alkaline phos.,36,150
+ALT (SGPT),0,35
+anion gap,,
+AST (SGOT),0,20
+bedside glucose,70,105
+BUN,8,20
+calcium,9,10.5
+chloride,98,106
+creatinine,0.5,1.2
+FiO2,,
+glucose,,
+Hct,,
+Hgb,,
+lactate,0.67,1.8
+#NAME?,,
+magnesium,1.5,2.4
+MCH,,
+MCHC,,
+MCV,,
+#NAME?,,
+MPV,,
+O2 Sat (%),,
+paCO2,,
+paO2,,
+pH,7.32,7.45
+phosphate,,
+platelets x 1000,150,350
+#NAME?,,
+potassium,3.5,5
+PT,11,13
+PT - INR,,
+RBC,,
+RDW,,
+sodium,136,145
+total bilirubin,0.3,1.2
+total protein,,
+WBC x 1000,4.5,11
+bicarbonate,23,28
+Total CO2,,
+HCO3,,
+triglycerides,0,150
+TSH,0.5,5
+total cholesterol,150,200
+HDL,40,1000
+BNP,0,100
+LDL,0,130
+ammonia,40,80
+prealbumin,18,45
+free T4,0.9,2.4
+cortisol,3,20
+T4,5,12
+CRP-hs,0,0.2
+T3,70,195

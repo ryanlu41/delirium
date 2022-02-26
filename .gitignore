@@ -12,4 +12,6 @@ First 24 Hour/Features/Labs/*.csv
 *__pycache__
 Dynamic/Features/Labs/AllLabsBeforeDelirium/*.csv
 Dynamic/Features/Labs/*.ipynb
-Dynamic/Dataset/FeatureTable.csv
+Dynamic/Dataset/*.csv
+Dynamic/Modeling/*.joblib
+Dynamic/Features/Labs/*copy.py
