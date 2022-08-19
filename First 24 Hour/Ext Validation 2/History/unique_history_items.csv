@@ -1,0 +1,32 @@
+itemid,label,value
+225811,cv - past medical history,Pacemaker
+225811,cv - past medical history,PVD
+225811,cv - past medical history,CHF
+225811,cv - past medical history,Arrhythmias
+225811,cv - past medical history,CAD
+225811,cv - past medical history,Hypertension
+225811,cv - past medical history,MI
+225811,cv - past medical history,CVA
+225811,cv - past medical history,Angina
+227341,history of falling (within 3 mnths),Yes
+227341,history of falling (within 3 mnths),No
+225094,history of slips / falls,1
+225094,history of slips / falls,0
+225059,past medical history,Pancreatitis
+225059,past medical history,HEMO or PD
+225059,past medical history,Renal Failure
+225059,past medical history,Diabetes - Insulin
+225059,past medical history,Liver Failure
+225059,past medical history,Hepatitis
+225059,past medical history,COPD
+225059,past medical history,Seizures
+225059,past medical history,GI Bleed
+225059,past medical history,Asthma
+225059,past medical history,Anemia
+225059,past medical history,Smoker
+225059,past medical history,Diabetes - Oral Agent
+225059,past medical history,ETOH
+227687,tobacco use history,Current use or use within 1 month of admission
+227687,tobacco use history,Former user - stopped more than 1 year ago
+227687,tobacco use history,Never used
+227687,tobacco use history,"Stopped more than 1 month ago, but less than 1 year ago"

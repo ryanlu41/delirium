@@ -1,0 +1,284 @@
+icd_code,icd_version,long_title
+Z9149,10,"other personal history of psychological trauma, not elsewhere classified"
+V1589,9,other specified personal history presenting hazards to health
+Z87730,10,personal history of (corrected) cleft lip and palate
+V1367,9,personal history of (corrected) congenital malformations of digestive system
+Z87720,10,personal history of (corrected) congenital malformations of eye
+V1364,9,"personal history of (corrected) congenital malformations of eye, ear, face and neck"
+Z87790,10,personal history of (corrected) congenital malformations of face and neck
+Z8774,10,personal history of (corrected) congenital malformations of heart and circulatory system
+V1365,9,personal history of (corrected) congenital malformations of heart and circulatory system
+Z8776,10,"personal history of (corrected) congenital malformations of integument, limbs and musculoskeletal system"
+V1368,9,"personal history of (corrected) congenital malformations of integument, limbs, and musculoskeletal systems"
+V1363,9,personal history of (corrected) congenital malformations of nervous system
+Z8775,10,personal history of (corrected) congenital malformations of respiratory system
+V1366,9,personal history of (corrected) congenital malformations of respiratory system
+V1361,9,personal history of (corrected) hypospadias
+Z87310,10,personal history of (healed) osteoporosis fracture
+Z87311,10,personal history of (healed) other pathological fracture
+Z87312,10,personal history of (healed) stress fracture
+Z8781,10,personal history of (healed) traumatic fracture
+Z91412,10,personal history of adult neglect
+Z91410,10,personal history of adult physical and sexual abuse
+Z91411,10,personal history of adult psychological abuse
+V111,9,personal history of affective disorders
+V113,9,personal history of alcoholism
+V146,9,personal history of allergy to analgesic agent
+V144,9,personal history of allergy to anesthetic agent
+V145,9,personal history of allergy to narcotic agent
+V143,9,personal history of allergy to other anti-infective agent
+V141,9,personal history of allergy to other antibiotic agent
+V148,9,personal history of allergy to other specified medicinal agents
+V140,9,personal history of allergy to penicillin
+V147,9,personal history of allergy to serum or vaccine
+V142,9,personal history of allergy to sulfonamides
+V149,9,personal history of allergy to unspecified medicinal agent
+V1381,9,personal history of anaphylaxis
+Z87892,10,personal history of anaphylaxis
+Z9221,10,personal history of antineoplastic chemotherapy
+V8741,9,personal history of antineoplastic chemotherapy
+V134,9,personal history of arthritis
+Z86012,10,personal history of benign carcinoid tumor
+Z86011,10,personal history of benign neoplasm of the brain
+V1241,9,personal history of benign neoplasm of the brain
+Z9886,10,personal history of breast implant removal
+Z87410,10,personal history of cervical dysplasia
+V1322,9,personal history of cervical dysplasia
+Z86010,10,personal history of colonic polyps
+V1272,9,personal history of colonic polyps
+V1584,9,personal history of contact with and (suspected) exposure to asbestos
+V1586,9,personal history of contact with and (suspected) exposure to lead
+V1585,9,personal history of contact with and (suspected) exposure to potentially hazardous body fluids
+V157,9,"personal history of contraception, presenting hazards to health"
+Z8631,10,personal history of diabetic foot ulcer
+V127,9,personal history of digestive disease
+V123,9,personal history of diseases of blood and blood-forming organs
+V133,9,personal history of diseases of skin and subcutaneous tissue
+Z862,10,personal history of diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+Z871,10,personal history of diseases of the digestive system
+Z872,10,personal history of diseases of the skin and subcutaneous tissue
+V122,9,"personal history of endocrine, metabolic, and immunity disorders"
+V8743,9,personal history of estrogen therapy
+V1580,9,personal history of failed moderate sedation
+Z9142,10,personal history of forced labor or sexual exploitation
+V1221,9,personal history of gestational diabetes
+Z8571,10,personal history of hodgkin lymphoma
+V1072,9,personal history of hodgkin's disease
+V8746,9,personal history of immunosuppressive therapy
+Z9225,10,personal history of immunosupression therapy
+Z98870,10,personal history of in utero procedure during pregnancy
+Z86000,10,personal history of in-situ neoplasm of breast
+Z86001,10,personal history of in-situ neoplasm of cervix uteri
+Z86005,10,personal history of in-situ neoplasm of middle ear and respiratory system
+Z86008,10,personal history of in-situ neoplasm of other site
+Z86007,10,personal history of in-situ neoplasm of skin
+Z8661,10,personal history of infections of the central nervous system
+V1242,9,personal history of infections of the central nervous system
+Z923,10,personal history of irradiation
+V153,9,"personal history of irradiation, presenting hazards to health"
+Z8615,10,personal history of latent tuberculosis infection
+Z856,10,personal history of leukemia
+V1060,9,"personal history of leukemia, unspecified"
+V1061,9,personal history of lymphoid leukemia
+V1071,9,personal history of lymphosarcoma and reticulosarcoma
+V1203,9,personal history of malaria
+Z8613,10,personal history of malaria
+Z85110,10,personal history of malignant carcinoid tumor of bronchus and lung
+Z85520,10,personal history of malignant carcinoid tumor of kidney
+Z85030,10,personal history of malignant carcinoid tumor of large intestine
+Z85040,10,personal history of malignant carcinoid tumor of rectum
+Z85060,10,personal history of malignant carcinoid tumor of small intestine
+Z85020,10,personal history of malignant carcinoid tumor of stomach
+V1082,9,personal history of malignant melanoma of skin
+Z85820,10,personal history of malignant melanoma of skin
+V1051,9,personal history of malignant neoplasm of bladder
+Z8551,10,personal history of malignant neoplasm of bladder
+Z85830,10,personal history of malignant neoplasm of bone
+V1081,9,personal history of malignant neoplasm of bone
+V1085,9,personal history of malignant neoplasm of brain
+Z85841,10,personal history of malignant neoplasm of brain
+Z853,10,personal history of malignant neoplasm of breast
+V103,9,personal history of malignant neoplasm of breast
+V1011,9,personal history of malignant neoplasm of bronchus and lung
+Z8541,10,personal history of malignant neoplasm of cervix uteri
+V1041,9,personal history of malignant neoplasm of cervix uteri
+V1003,9,personal history of malignant neoplasm of esophagus
+Z8501,10,personal history of malignant neoplasm of esophagus
+V1084,9,personal history of malignant neoplasm of eye
+Z85840,10,personal history of malignant neoplasm of eye
+V1040,9,"personal history of malignant neoplasm of female genital organ, unspecified"
+V1000,9,"personal history of malignant neoplasm of gastrointestinal tract, unspecified"
+V1052,9,personal history of malignant neoplasm of kidney
+V1005,9,personal history of malignant neoplasm of large intestine
+Z8521,10,personal history of malignant neoplasm of larynx
+V1021,9,personal history of malignant neoplasm of larynx
+V1007,9,personal history of malignant neoplasm of liver
+Z8505,10,personal history of malignant neoplasm of liver
+V1045,9,"personal history of malignant neoplasm of male genital organ, unspecified"
+V1022,9,"personal history of malignant neoplasm of nasal cavities, middle ear, and accessory sinuses"
+Z8522,10,"personal history of malignant neoplasm of nasal cavities, middle ear, and accessory sinuses"
+V1002,9,personal history of malignant neoplasm of other and unspecified oral cavity and pharynx
+Z8509,10,personal history of malignant neoplasm of other digestive organs
+Z85858,10,personal history of malignant neoplasm of other endocrine glands
+V1088,9,personal history of malignant neoplasm of other endocrine glands and related structures
+Z8544,10,personal history of malignant neoplasm of other female genital organs
+V1044,9,personal history of malignant neoplasm of other female genital organs
+V1009,9,personal history of malignant neoplasm of other gastrointestinal tract
+Z8549,10,personal history of malignant neoplasm of other male genital organs
+V1049,9,personal history of malignant neoplasm of other male genital organs
+Z8589,10,personal history of malignant neoplasm of other organs and systems
+V1086,9,personal history of malignant neoplasm of other parts of nervous system
+Z85848,10,personal history of malignant neoplasm of other parts of nervous tissue
+Z8542,10,personal history of malignant neoplasm of other parts of uterus
+V1042,9,personal history of malignant neoplasm of other parts of uterus
+V1029,9,personal history of malignant neoplasm of other respiratory and intrathoracic organs
+Z8529,10,personal history of malignant neoplasm of other respiratory and intrathoracic organs
+V1089,9,personal history of malignant neoplasm of other sites
+Z85818,10,"personal history of malignant neoplasm of other sites of lip, oral cavity, and pharynx"
+V1059,9,personal history of malignant neoplasm of other urinary organs
+Z8559,10,personal history of malignant neoplasm of other urinary tract organ
+V1043,9,personal history of malignant neoplasm of ovary
+Z8543,10,personal history of malignant neoplasm of ovary
+Z8507,10,personal history of malignant neoplasm of pancreas
+Z8546,10,personal history of malignant neoplasm of prostate
+V1046,9,personal history of malignant neoplasm of prostate
+V1006,9,"personal history of malignant neoplasm of rectum, rectosigmoid junction, and anus"
+V1053,9,personal history of malignant neoplasm of renal pelvis
+Z8553,10,personal history of malignant neoplasm of renal pelvis
+V1020,9,"personal history of malignant neoplasm of respiratory organ, unspecified"
+Z85831,10,personal history of malignant neoplasm of soft tissue
+V1004,9,personal history of malignant neoplasm of stomach
+Z8547,10,personal history of malignant neoplasm of testis
+V1047,9,personal history of malignant neoplasm of testis
+V1087,9,personal history of malignant neoplasm of thyroid
+Z85850,10,personal history of malignant neoplasm of thyroid
+V1001,9,personal history of malignant neoplasm of tongue
+Z85810,10,personal history of malignant neoplasm of tongue
+V1012,9,personal history of malignant neoplasm of trachea
+Z8512,10,personal history of malignant neoplasm of trachea
+Z8500,10,personal history of malignant neoplasm of unspecified digestive organ
+Z8540,10,personal history of malignant neoplasm of unspecified female genital organ
+Z8545,10,personal history of malignant neoplasm of unspecified male genital organ
+Z8520,10,personal history of malignant neoplasm of unspecified respiratory organ
+Z85819,10,"personal history of malignant neoplasm of unspecified site of lip, oral cavity, and pharynx"
+Z8550,10,personal history of malignant neoplasm of unspecified urinary tract organ
+Z8554,10,personal history of malignant neoplasm of ureter
+V1050,9,"personal history of malignant neoplasm of urinary organ, unspecified"
+Z859,10,"personal history of malignant neoplasm, unspecified"
+V1091,9,personal history of malignant neuroendocrine tumor
+Z86006,10,personal history of melanoma in-situ
+Z85821,10,personal history of merkel cell carcinoma
+V1204,9,personal history of methicillin resistant staphylococcus aureus
+Z8614,10,personal history of methicillin resistant staphylococcus aureus infection
+V8742,9,personal history of monoclonal drug therapy
+V1063,9,personal history of monocytic leukemia
+V1062,9,personal history of myeloid leukemia
+Z62812,10,personal history of neglect in childhood
+Z8603,10,personal history of neoplasm of uncertain behavior
+Z87441,10,personal history of nephrotic syndrome
+V112,9,personal history of neurosis
+Z87891,10,personal history of nicotine dependence
+Z8572,10,personal history of non-hodgkin lymphomas
+V1581,9,"personal history of noncompliance with medical treatment, presenting hazards to health"
+V121,9,personal history of nutritional deficiency
+V1369,9,personal history of other (corrected) congenital malformations
+Z87798,10,personal history of other (corrected) congenital malformations
+V1362,9,personal history of other (corrected) congenital malformations of genitourinary system
+Z87828,10,personal history of other (healed) physical injury and trauma
+Z86018,10,personal history of other benign neoplasm
+Z8759,10,"personal history of other complications of pregnancy, childbirth and the puerperium"
+V1259,9,personal history of other diseases of circulatory system
+V1279,9,personal history of other diseases of digestive system
+Z87438,10,personal history of other diseases of male genital organs
+V1269,9,personal history of other diseases of respiratory system
+Z8679,10,personal history of other diseases of the circulatory system
+Z8719,10,personal history of other diseases of the digestive system
+Z8742,10,personal history of other diseases of the female genital tract
+Z8739,10,personal history of other diseases of the musculoskeletal system and connective tissue
+Z8669,10,personal history of other diseases of the nervous system and sense organs
+Z8709,10,personal history of other diseases of the respiratory system
+Z87448,10,personal history of other diseases of urinary system
+V1249,9,personal history of other disorders of nervous system and sense organs
+Z9229,10,personal history of other drug therapy
+V8749,9,personal history of other drug therapy
+V1229,9,"personal history of other endocrine, metabolic, and immunity disorders"
+Z8639,10,"personal history of other endocrine, nutritional and metabolic disease"
+V1329,9,personal history of other genital system and obstetric disorders
+Z8619,10,personal history of other infectious and parasitic diseases
+V1209,9,personal history of other infectious and parasitic diseases
+V1559,9,personal history of other injury
+V1069,9,personal history of other leukemia
+V1079,9,personal history of other lymphatic and hematopoietic neoplasms
+Z85118,10,personal history of other malignant neoplasm of bronchus and lung
+Z85528,10,personal history of other malignant neoplasm of kidney
+Z85038,10,personal history of other malignant neoplasm of large intestine
+Z85048,10,"personal history of other malignant neoplasm of rectum, rectosigmoid junction, and anus"
+Z85828,10,personal history of other malignant neoplasm of skin
+V1083,9,personal history of other malignant neoplasm of skin
+Z85068,10,personal history of other malignant neoplasm of small intestine
+Z85028,10,personal history of other malignant neoplasm of stomach
+Z85238,10,personal history of other malignant neoplasm of thymus
+Z8579,10,"personal history of other malignant neoplasms of lymphoid, hematopoietic and related tissues"
+Z8659,10,personal history of other mental and behavioral disorders
+V118,9,personal history of other mental disorders
+V1359,9,personal history of other musculoskeletal disorders
+Z87738,10,personal history of other specified (corrected) congenital malformations of digestive system
+Z87718,10,personal history of other specified (corrected) congenital malformations of genitourinary system
+Z87728,10,personal history of other specified (corrected) congenital malformations of nervous system and sense organs
+Z87898,10,personal history of other specified conditions
+V138,9,personal history of other specified diseases
+V1389,9,personal history of other specified diseases
+V1309,9,personal history of other specified urinary system disorders
+Z86718,10,personal history of other venous thrombosis and embolism
+V1351,9,personal history of pathologic fracture
+V1271,9,personal history of peptic ulcer disease
+Z8711,10,personal history of peptic ulcer disease
+Z62810,10,personal history of physical and sexual abuse in childhood
+Z8701,10,personal history of pneumonia (recurrent)
+V1261,9,personal history of pneumonia (recurrent)
+V156,9,"personal history of poisoning, presenting hazards to health"
+Z8612,10,personal history of poliomyelitis
+V1202,9,personal history of poliomyelitis
+Z8751,10,personal history of pre-term labor
+V1321,9,personal history of pre-term labor
+Z87430,10,personal history of prostatic dysplasia
+Z62811,10,personal history of psychological abuse in childhood
+Z86711,10,personal history of pulmonary embolism
+V1255,9,personal history of pulmonary embolism
+V1553,9,personal history of retained foreign body fully removed
+V6222,9,personal history of return from military deployment
+V110,9,personal history of schizophrenia
+Z915,10,personal history of self-harm
+Z87890,10,personal history of sex reassignment
+V1352,9,personal history of stress fracture
+V1253,9,personal history of sudden cardiac arrest
+Z8674,10,personal history of sudden cardiac arrest
+V151,9,"personal history of surgery to heart and great vessels, presenting hazards to health"
+V1529,9,personal history of surgery to other organs
+V8745,9,personal history of systemic steroid therapy
+V1252,9,personal history of thrombophlebitis
+Z8672,10,personal history of thrombophlebitis
+V1582,9,personal history of tobacco use
+V1254,9,"personal history of transient ischemic attack (tia), and cerebral infarction without residual deficits"
+Z8673,10,"personal history of transient ischemic attack (tia), and cerebral infarction without residual deficits"
+V1552,9,personal history of traumatic brain injury
+Z87820,10,personal history of traumatic brain injury
+V1551,9,personal history of traumatic fracture
+V1201,9,personal history of tuberculosis
+Z8611,10,personal history of tuberculosis
+V1583,9,personal history of underimmunization status
+Z62819,10,personal history of unspecified abuse in childhood
+Z91419,10,personal history of unspecified adult abuse
+V1250,9,personal history of unspecified circulatory disease
+V1270,9,personal history of unspecified digestive disease
+V139,9,personal history of unspecified disease
+V1200,9,personal history of unspecified infectious and parasitic disease
+V1090,9,personal history of unspecified malignant neoplasm
+V119,9,personal history of unspecified mental disorder
+V1300,9,personal history of unspecified urinary disorder
+Z87440,10,personal history of urinary (tract) infections
+V1301,9,personal history of urinary calculi
+Z87442,10,personal history of urinary calculi
+V1251,9,personal history of venous thrombosis and embolism
+V1324,9,personal history of vulvar dysplasia
+V1302,9,"personal history, urinary (tract) infection"
